@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Register.Views.PersonSelectionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="clr-namespace:Register"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Register.ViewModels"
+    xmlns:foundation="clr-namespace:Register.Wpf">
+    <UserControl.DataContext>
+        <vm:PersonSelectionModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <DataGrid  Margin="10" Background="LightSkyBlue"
+            AutoGenerateColumns="False"
+			ItemsSource="{Binding DataItems}"
+			SelectedItem="{Binding SelectedPerson}"
+            DisplayMemberPath="fam"
+			foundation:CommandBehavior.RoutedEventName="SelectionChanged"
+			foundation:CommandBehavior.TheCommandToRun="{Binding ListBoxCommand}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=fam}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя"  Binding="{Binding Path=im}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Path=ot}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=dr, StringFormat={}{0:dd.MM.yyyy}}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<ListBox Margin="10" Background="LightSkyBlue"
+			ItemsSource="{Binding DataItems}"
+			SelectedItem="{Binding SelectedPerson}"
+            DisplayMemberPath="fam"
+			foundation:CommandBehavior.RoutedEventName="SelectionChanged"
+			foundation:CommandBehavior.TheCommandToRun="{Binding ListBoxCommand}"/>-->
+    </Grid>
+</UserControl>

@@ -1,0 +1,25 @@
+﻿<Window x:Class="Register.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vw="clr-namespace:Register.Views"
+        xmlns:local="clr-namespace:Register"
+        Title="РЕГИСТР ЗАСТРАХОВАННЫХ СМО" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="LightBrushedx.jpg" TileMode="Tile"
+                        ViewportUnits="Absolute" Viewport="0,0,200,200"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <vw:PersonSelectionView Grid.Row="0" Grid.Column="0"/>
+
+        <GridSplitter Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                      ResizeBehavior="PreviousAndNext" Width="5"></GridSplitter>
+        <vw:PersonDisplay Grid.Row="0" Grid.Column="2"/>
+
+    </Grid>
+</Window>

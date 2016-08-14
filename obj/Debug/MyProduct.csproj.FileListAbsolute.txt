@@ -1,0 +1,17 @@
+D:\MYKMS\MyProduct\bin\Debug\MyProduct.exe.config
+D:\MYKMS\MyProduct\bin\Debug\MyProduct.exe
+D:\MYKMS\MyProduct\bin\Debug\MyProduct.pdb
+D:\MYKMS\MyProduct\obj\Debug\MyProduct.csprojResolveAssemblyReference.cache
+D:\MYKMS\MyProduct\obj\Debug\MainWindow.g.cs
+D:\MYKMS\MyProduct\obj\Debug\App.g.cs
+D:\MYKMS\MyProduct\obj\Debug\MyProduct_MarkupCompile.cache
+D:\MYKMS\MyProduct\obj\Debug\MyProduct_MarkupCompile.lref
+D:\MYKMS\MyProduct\obj\Debug\MainWindow.baml
+D:\MYKMS\MyProduct\obj\Debug\MyProduct.g.resources
+D:\MYKMS\MyProduct\obj\Debug\MyProduct.Properties.Resources.resources
+D:\MYKMS\MyProduct\obj\Debug\MyProduct.csproj.GenerateResource.Cache
+D:\MYKMS\MyProduct\obj\Debug\MyProduct.exe
+D:\MYKMS\MyProduct\obj\Debug\MyProduct.pdb
+D:\MYKMS\MyProduct\obj\Debug\Views\ProductSelectionView.g.cs
+D:\MYKMS\MyProduct\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\MYKMS\MyProduct\obj\Debug\Views\ProductSelectionView.baml

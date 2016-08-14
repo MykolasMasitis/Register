@@ -1,0 +1,1 @@
+A new WPF (MVVM) project instead of old VFP kmsn.
