@@ -17,10 +17,14 @@
 
         <StackPanel x:Name="myStack" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5,2,10,10" Grid.Row="0">
             <Button Margin="2,5,0,0" Padding="5" Background="Black" Height="35" Width="70">Refresh</Button>
-            <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70">Clear</Button>
             <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70"
-                    Command="{Binding SavePerson}" >Update</Button>
-            <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70">Delete</Button>
+                    Command="{Binding ClearCommand}">Clear</Button>
+            <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70"
+                    Command="{Binding AddCommand}">Add</Button>
+            <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70"
+                    Command="{Binding UpdateCommand}" >Update</Button>
+            <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70"
+                    Command="{Binding DeleteCommand }">Delete</Button>
             <Separator Width="100"  ></Separator>
             <Button Margin="2,5,0,0" Padding="2" Background="Black" Height="35" Width="70"
                     Content="NSI" Command="{Binding CreateNSI}" ></Button>
@@ -101,6 +105,13 @@
                     <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="5"
                                 BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
                                 SelectedDate="{Binding Path=DisplayedPerson.dr, Mode=TwoWay}"/>
+
+                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="2">Пол:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="5" Grid.Column="3" MinWidth="150" 
+                              ItemsSource="{Binding cmbWItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.w, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
 
                 </Grid>
             </TabItem>

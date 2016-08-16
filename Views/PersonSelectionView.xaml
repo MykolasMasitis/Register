@@ -16,10 +16,10 @@
 			foundation:CommandBehavior.RoutedEventName="SelectionChanged"
 			foundation:CommandBehavior.TheCommandToRun="{Binding ListBoxCommand}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=fam}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Имя"  Binding="{Binding Path=im}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding Path=ot}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=dr, StringFormat={}{0:dd.MM.yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=fam}" MinWidth="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя"  Binding="{Binding Path=im}" MinWidth="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Path=ot}" MinWidth="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=dr, StringFormat={}{0:dd.MM.yyyy}}" MinWidth="100"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <!--<ListBox Margin="10" Background="LightSkyBlue"

@@ -485,6 +485,7 @@ namespace Register.ViewModels
 
         public void CopyPerson(kms p)
         {
+            this.recid = p.recid;
             this.act = p.act;
             this.pv = p.pv;
             this.nz = p.nz;

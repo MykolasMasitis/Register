@@ -24,6 +24,7 @@ namespace Register.ViewModels
             messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
             cmbStatusItems = status.StatusList(App.conString);
             cmbCodFioItems = codfio.CodFioList(App.conString);
+            cmbWItems = w.WList();
         } //ctor
 
         private bool isSelected = false;
@@ -49,6 +50,13 @@ namespace Register.ViewModels
             set { _cmbCodFioItems = value; }
         }
 
+        private IList<w> _cmbWItems;
+        public IList<w> cmbWItems
+        {
+            get { return _cmbWItems; }
+            set { _cmbWItems = value; }
+        }
+
         private kms displayedPerson = new kms();
         public kms DisplayedPerson 
         {
@@ -63,20 +71,61 @@ namespace Register.ViewModels
         private RelayCommand createNSI;
         public ICommand CreateNSI 
         {
-            get { return createNSI ?? (createNSI = new RelayCommand(() => crNSI(), () => isSelected)); }
+            get { return createNSI ?? (createNSI = new RelayCommand(() => crNSI())); }
         }
         private void crNSI()
         {
         }
 
-        private RelayCommand savePerson; 
-        public ICommand SavePerson 
+        private RelayCommand addCommand; 
+        public ICommand AddCommand  
         {
-            get { return savePerson ?? (savePerson = new RelayCommand(() => SaveKMS())); }
+            get { return addCommand ?? (addCommand = new RelayCommand(() => AddKMS())); }
         }
-        private void SaveKMS() 
+        private void AddKMS() 
         {
-            MessageBox.Show("Save!");
+            //if (!stat.ChkProductForAdd(DisplayedProduct)) return;
+            if (!App.StoreDB.AddPerson(DisplayedPerson))
+            {
+                MessageBox.Show(App.StoreDB.errorMessage);
+                stat.Status = App.StoreDB.errorMessage;
+                return;
+            }
+            App.Messenger.NotifyColleagues("AddPerson", DisplayedPerson);
+        }
+
+        private RelayCommand deleteCommand;  
+        public ICommand DeleteCommand  
+        {
+            get { return deleteCommand ?? (deleteCommand = new RelayCommand(() => DeleteKMS(), () => isSelected)); }
+        }
+        private void DeleteKMS() 
+        {
+            if (!App.StoreDB.DeletePerson(DisplayedPerson.recid))
+            {
+                MessageBox.Show(App.StoreDB.errorMessage);
+                stat.Status = App.StoreDB.errorMessage;
+                return;
+            }
+            isSelected = false;
+            App.Messenger.NotifyColleagues("DeletePerson");
+        } //DeleteProduct
+
+        private RelayCommand updateCommand;   
+        public ICommand UpdateCommand  
+        {
+            get { return updateCommand ?? (updateCommand = new RelayCommand(() => UpdatePerson(), () => isSelected)); }
+        }
+        private void UpdatePerson()  
+        {
+            //if (!stat.ChkProductForUpdate(DisplayedPerson)) return;
+            if (!App.StoreDB.UpdatePerson(DisplayedPerson))
+            {
+                MessageBox.Show(App.StoreDB.errorMessage);
+                stat.Status = App.StoreDB.errorMessage;
+                return;
+            }
+            App.Messenger.NotifyColleagues("UpdatePerson", DisplayedPerson);
         }
 
         private RelayCommand getPersonsCommand;  

@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\PersonDisplayModelStatus.cs" />
     <Compile Include="ViewModels\PersonSelectionModel.cs" />
     <Compile Include="ViewModels\status.cs" />
+    <Compile Include="ViewModels\w.cs" />
     <Compile Include="Views\PersonDisplay.xaml.cs">
       <DependentUpon>PersonDisplay.xaml</DependentUpon>
     </Compile>

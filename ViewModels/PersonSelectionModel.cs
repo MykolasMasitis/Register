@@ -22,11 +22,26 @@ namespace Register.ViewModels
             listBoxCommand = new RelayCommand(() => SelectionHasChanged());
             App.Messenger.Register("PersonCleared", (Action)(() => SelectedPerson = null));
             App.Messenger.Register("GetPersons", (Action)(() => GetPersons()));
-            
-            //App.Messenger.Register("UpdateProduct", (Action<Product>)(param => UpdateProduct(param)));
-            //App.Messenger.Register("DeleteProduct", (Action)(() => DeleteProduct()));
-            //App.Messenger.Register("AddProduct", (Action<Product>)(param => AddProduct(param)));
+            App.Messenger.Register("UpdatePerson", (Action<kms>)(param => UpdatePerson(param)));
+            App.Messenger.Register("DeletePerson", (Action)(() => DeletePerson()));
+            App.Messenger.Register("AddPerson", (Action<kms>)(param => AddPerson(param)));
+        }
 
+        private void AddPerson(kms p)
+        {
+            dataItems.Add(p);
+        }
+
+        private void UpdatePerson(kms p)
+        {
+            int index = dataItems.IndexOf(selectedPerson);
+            dataItems.ReplaceItem(index, p);
+            SelectedPerson = p;
+        }
+
+        private void DeletePerson()  
+        {
+            dataItems.Remove(selectedPerson);
         }
 
         private void GetPersons() 
