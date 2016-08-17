@@ -36,3 +36,5 @@ D:\MYKMS\Register\obj\Debug\GelButtonResourceDictionary.baml
 D:\MYKMS\Register\obj\Debug\App.baml
 D:\MYKMS\Register\obj\Debug\Views\PersonDisplay.g.cs
 D:\MYKMS\Register\obj\Debug\Views\PersonDisplay.baml
+D:\MYKMS\Register\bin\Debug\Register.exe.CodeAnalysisLog.xml
+D:\MYKMS\Register\bin\Debug\Register.exe.lastcodeanalysissucceeded

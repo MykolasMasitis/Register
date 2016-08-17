@@ -47,6 +47,6 @@ namespace Register.ViewModels
             foreach (codfio stt in CodFioList(strConn)) cmb.Items.Add(stt);
         }
 
-        public static string qLoad { get { return "select * from codfio"; } }
+        public static string qLoad { get { return "select * from [nsi].[codfio]"; } }
     }
 }

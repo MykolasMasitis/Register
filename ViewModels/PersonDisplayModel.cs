@@ -22,9 +22,10 @@ namespace Register.ViewModels
             Messenger messenger = App.Messenger;
             messenger.Register("PersonSelectionChanged", (Action<kms>)(param => ProcessPerson(param)));
             messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
-            cmbStatusItems = status.StatusList(App.conString);
-            cmbCodFioItems = codfio.CodFioList(App.conString);
-            cmbWItems = w.WList();
+            StatusItems = status.StatusList(App.conString);
+            CodFioItems = codfio.CodFioList(App.conString);
+            WItems = w.WList();
+            PredstItems = predst.PredstList(App.conString);
         } //ctor
 
         private bool isSelected = false;
@@ -36,25 +37,32 @@ namespace Register.ViewModels
                 PropertyChanged(this, e);
         }
 
-        private IList<status> _cmbStatusItems;
-        public IList<status> cmbStatusItems
+        private IList<status> _StatusItems;
+        public IList<status> StatusItems
         {
-            get { return _cmbStatusItems; }
-            set { _cmbStatusItems = value; }
+            get { return _StatusItems; }
+            set { _StatusItems = value; }
         }
 
-        private IList<codfio> _cmbCodFioItems; 
-        public IList<codfio> cmbCodFioItems 
+        private IList<codfio> _CodFioItems; 
+        public IList<codfio> CodFioItems 
         {
-            get { return _cmbCodFioItems; }
-            set { _cmbCodFioItems = value; }
+            get { return _CodFioItems; }
+            set { _CodFioItems = value; }
         }
 
-        private IList<w> _cmbWItems;
-        public IList<w> cmbWItems
+        private IList<w> _WItems;
+        public IList<w> WItems
         {
-            get { return _cmbWItems; }
-            set { _cmbWItems = value; }
+            get { return _WItems; }
+            set { _WItems = value; }
+        }
+
+        private IList<predst> _PredstItems;
+        public IList<predst> PredstItems
+        {
+            get { return _PredstItems; }
+            set { _PredstItems = value; }
         }
 
         private kms displayedPerson = new kms();

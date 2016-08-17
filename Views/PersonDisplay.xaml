@@ -62,19 +62,35 @@
                                 BorderBrush="{Binding Path=Stat.DpBrush}" BorderThickness="1" 
                                 SelectedDate="{Binding Path=DisplayedPerson.dp, Mode=TwoWay}"/>
 
+                    <TextBlock Margin="7" Grid.Row="0" Grid.Column="2">Обратился:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="0" Grid.Column="3" MinWidth="150" 
+                              ItemsSource="{Binding PredstItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.predst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"></ComboBox>
+
                     <TextBlock Margin="7" Grid.Row="0" Grid.Column="6">Статус:</TextBlock>
                     <ComboBox x:Name="cmbStatus" Margin="5" Grid.Row="0" Grid.Column="7" MinWidth="150" 
-                              ItemsSource="{Binding cmbStatusItems }"
+                              ItemsSource="{Binding StatusItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"></ComboBox>
+
+                    <TextBlock Margin="7" Grid.Row="1" Grid.Column="0">Ошибка:</TextBlock>
+                    <TextBlock Margin="7" Grid.Row="1" Grid.Column="2">Заявка:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="1" Grid.Column="3" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.nz, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Margin="7" Grid.Row="1" Grid.Column="6">Дата выдачи:</TextBlock>
+                    <DatePicker Grid.Row="1" Grid.Column="7" HorizontalAlignment="Left" Margin="5"
+                                BorderThickness="1"
+                                SelectedDate="{Binding Path=DisplayedPerson.dpok, Mode=TwoWay}"/>
 
                     <TextBlock Margin="7" Grid.Row="2" Grid.Column="0">Фамилия:</TextBlock>
                     <TextBox Margin="5" Grid.Row="2" Grid.Column="1" BorderBrush="{Binding Path=Stat.FamBrush}" BorderThickness="1"
                      Text="{Binding Path=DisplayedPerson.fam, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <TextBlock Margin="7" Grid.Row="2" Grid.Column="2">Особый случай:</TextBlock>
                     <ComboBox Margin="5" Grid.Row="2" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding cmbCodFioItems }"
+                              ItemsSource="{Binding CodFioItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.d_type1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"></ComboBox>
@@ -84,7 +100,7 @@
                      Text="{Binding Path=DisplayedPerson.im, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <TextBlock Margin="7" Grid.Row="3" Grid.Column="2">Особый случай:</TextBlock>
                     <ComboBox Margin="5" Grid.Row="3" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding cmbCodFioItems }"
+                              ItemsSource="{Binding CodFioItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.d_type2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"></ComboBox>
@@ -94,7 +110,7 @@
                      Text="{Binding Path=DisplayedPerson.ot, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <TextBlock Margin="7" Grid.Row="4" Grid.Column="2">Особый случай:</TextBlock>
                     <ComboBox Margin="5" Grid.Row="4" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding cmbCodFioItems }"
+                              ItemsSource="{Binding CodFioItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.d_type3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code">
@@ -108,7 +124,7 @@
 
                     <TextBlock Margin="7" Grid.Row="5" Grid.Column="2">Пол:</TextBlock>
                     <ComboBox Margin="5" Grid.Row="5" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding cmbWItems }"
+                              ItemsSource="{Binding WItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.w, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
