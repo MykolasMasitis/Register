@@ -54,6 +54,9 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
@@ -121,14 +124,57 @@
                     <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="5"
                                 BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
                                 SelectedDate="{Binding Path=DisplayedPerson.dr, Mode=TwoWay}"/>
-
-                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="2">Пол:</TextBlock>
+                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="2">Достоверность даты:</TextBlock>
                     <ComboBox Margin="5" Grid.Row="5" Grid.Column="3" MinWidth="150" 
+                              ItemsSource="{Binding TrueDrItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.true_dr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+
+                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="6">Пол:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="5" Grid.Column="7" MinWidth="150" 
                               ItemsSource="{Binding WItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.w, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
 
+                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="0">ТИП:</TextBlock>
+                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="2">ВС:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="6" Grid.Column="3" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.vs, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="4">КМС:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="6" Grid.Column="5" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.sn_card, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="6">КМС:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="6" Grid.Column="7" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.enp, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                    <TextBlock Margin="7" Grid.Row="7" Grid.Column="0">Признак движения:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="7" Grid.Column="1" MinWidth="150" 
+                              ItemsSource="{Binding JtItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.jt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+
+                    <TextBlock Margin="7" Grid.Row="7" Grid.Column="2">Сценарий:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="7" Grid.Column="3" MinWidth="150" 
+                              ItemsSource="{Binding ScnItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.scn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+                    <TextBlock Margin="7" Grid.Row="8" Grid.Column="0">СНИЛС:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="8" Grid.Column="1" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.snils, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Margin="7" Grid.Row="9" Grid.Column="0">Подано в файле:</TextBlock>
+
+                    <TextBlock Margin="7" Grid.Row="9" Grid.Column="2">Принято в файле:</TextBlock>
+
+                    <TextBlock Margin="7" Grid.Row="10" Grid.Column="0">d_type4:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="10" Grid.Column="1" MinWidth="150" 
+                              ItemsSource="{Binding dT4Items }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.form, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Документ"></TabItem>

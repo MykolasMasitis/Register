@@ -23,6 +23,8 @@ namespace Register
     {
         public MainWindow()
         {
+            //string curdir = System.IO.Directory.GetCurrentDirectory();
+            //MessageBox.Show(curdir);
             InitializeComponent();
             //status.FillComboBox(cmdStatus, App.connectionString);
         }

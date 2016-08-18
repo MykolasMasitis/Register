@@ -80,12 +80,16 @@
     <Compile Include="Foundation\RelayCommand.cs" />
     <Compile Include="Model\StoreDB.cs" />
     <Compile Include="ViewModels\CodFio.cs" />
+    <Compile Include="ViewModels\d_type4.cs" />
+    <Compile Include="ViewModels\jt.cs" />
     <Compile Include="ViewModels\kms.cs" />
     <Compile Include="ViewModels\PersonDisplayModel.cs" />
     <Compile Include="ViewModels\PersonDisplayModelStatus.cs" />
     <Compile Include="ViewModels\PersonSelectionModel.cs" />
     <Compile Include="ViewModels\predst.cs" />
+    <Compile Include="ViewModels\scenario.cs" />
     <Compile Include="ViewModels\status.cs" />
+    <Compile Include="ViewModels\true_dr.cs" />
     <Compile Include="ViewModels\w.cs" />
     <Compile Include="Views\PersonDisplay.xaml.cs">
       <DependentUpon>PersonDisplay.xaml</DependentUpon>

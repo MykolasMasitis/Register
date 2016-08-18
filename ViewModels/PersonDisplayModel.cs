@@ -26,6 +26,10 @@ namespace Register.ViewModels
             CodFioItems = codfio.CodFioList(App.conString);
             WItems = w.WList();
             PredstItems = predst.PredstList(App.conString);
+            JtItems = jt.JtList(App.conString);
+            ScnItems = scenario.ScnList(App.conString);
+            dT4Items = d_type4.dT4List(App.conString);
+            TrueDrItems = true_dr.TrueDrList(App.conString);
         } //ctor
 
         private bool isSelected = false;
@@ -63,6 +67,34 @@ namespace Register.ViewModels
         {
             get { return _PredstItems; }
             set { _PredstItems = value; }
+        }
+
+        private IList<jt> _JtItems;
+        public IList<jt> JtItems
+        {
+            get { return _JtItems; }
+            set { _JtItems = value; }
+        }
+
+        private IList<scenario> _ScnItems;
+        public IList<scenario> ScnItems
+        {
+            get { return _ScnItems; }
+            set { _ScnItems = value; }
+        }
+
+        private IList<d_type4> _dT4Items;
+        public IList<d_type4> dT4Items 
+        {
+            get { return _dT4Items; }
+            set { _dT4Items = value; }
+        }
+
+        private IList<true_dr> _trueDrItems;
+        public IList<true_dr> TrueDrItems 
+        {
+            get { return _trueDrItems; }
+            set { _trueDrItems = value; }
         }
 
         private kms displayedPerson = new kms();

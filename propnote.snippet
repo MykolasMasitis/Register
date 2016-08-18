@@ -1,0 +1,48 @@
+<!-- CTRL+K, CTRL+X = Insert Snippet -->
+<!-- CTRL+K, CTRL+B = Manage Snippets -->
+<CodeSnippet Format="1.0.0" 
+             xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  
+  <Header>
+    <Title>Property with NotifyPropertyChanged</Title>
+    <Author>Jerry Nixon</Author>
+    <Shortcut>propnote</Shortcut>
+    <Description>Property with NotifyPropertyChanged</Description>
+    <SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+    </SnippetTypes>
+  </Header>
+  
+  <Snippet>
+    
+    <Declarations>
+      <Literal>
+        <ID>name</ID>
+        <Default>MyProperty</Default>
+      </Literal>
+      <Literal>
+        <ID>type</ID>
+        <Default>string</Default>
+      </Literal>
+    </Declarations>
+    
+    <Code Language="CSharp">
+      <![CDATA[  
+      private $type$ m_$name$;
+      public $type$ $name$
+      {
+        get { return m_$name$; }
+        set
+        {
+          if (PropertyChanging != null)
+	    PropertyChanging(this, new PropertyChangingEventArgs("$name$"));
+          m_$name$ = value;
+          if (PropertyChanged != null)
+	    PropertyChanged(this, new PropertyChangedEventArgs("$name$"));
+        }
+      }
+]]>
+    </Code>
+    
+  </Snippet>
+</CodeSnippet>
