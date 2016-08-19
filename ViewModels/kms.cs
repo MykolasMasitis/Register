@@ -481,6 +481,14 @@ namespace Register.ViewModels
         }
 
         public DateTime created { get; set; }
+
+        private int? _ul;
+        public int? ul 
+        {
+            get { return _ul; }
+            set { _ul = value; NotifyPropertyChanged("ul"); }
+        }
+        
         #endregion #Fields
 
         public void CopyPerson(kms p)
@@ -555,6 +563,7 @@ namespace Register.ViewModels
             this.dpok = p.dpok;
             this.blanc = p.blanc;
             this.created = p.created;
+            this.ul = p.ul;
         }
 
         #region Constructors
@@ -570,7 +579,7 @@ namespace Register.ViewModels
             string _coment, string _ktg, byte _gzk_flag, byte _doc_flag, string _uec_flag, string _s_card2,
             string _n_card2, string _is2fio, int? _ofioid, string _is2doc, int? _odocid, string _mcod, byte? _oper,
             byte? _operpv, byte? _isrereg, int? _osmoid, int? _permid, int? _perm2id, int? _enp2id, int? _predstid,
-            int? _wrkid, string _plant, DateTime? _dpok, string _blanc, DateTime _created)
+            int? _wrkid, string _plant, DateTime? _dpok, string _blanc, DateTime _created, int? _ul)
         {   recid = _recid; act = _act; pv = _pv; nz = _nz; status = _status; p_doc = _p_doc; p_doc2 = _p_doc2;
             vs = _vs; vs_data = _vs_data; sn_card = _sn_card; enp = _enp; gz_data = _gz_data; q = _q; dp = _dp;
             dt = _dt; fam = _fam; d_type1 = _d_type1; im = _im; d_type2 = _d_type2; ot = _ot; d_type3 = _d_type3;
@@ -582,6 +591,7 @@ namespace Register.ViewModels
             ofioid = _ofioid; is2doc = _is2doc; odocid = _odocid; mcod = _mcod; oper = _oper; operpv = _operpv;
             isrereg = _isrereg; osmoid = _osmoid; permid = _permid; perm2id = _perm2id; enp2id = _enp2id;
             predstid = _predstid; wrkid = _wrkid; plant = _plant; dpok = _dpok; blanc = _blanc; created=_created;
+            ul = _ul;
         }
         #endregion Constructors
         #region Implemented Interface

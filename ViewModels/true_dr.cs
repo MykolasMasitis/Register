@@ -11,6 +11,8 @@ namespace Register.ViewModels
         public byte code { get; set; }
         public string name { get; set; }
 
+        public string errorMessage;
+
         public true_dr(SqlDataReader reader)
         {
             recid = reader.GetInt32(reader.GetOrdinal("recid"));
@@ -30,11 +32,15 @@ namespace Register.ViewModels
             {
                 conn.Open();
                 SqlDataReader dr = null;
-                SqlCommand command = new SqlCommand(qLoad, conn);
                 try
                 {
+                    SqlCommand command = new SqlCommand(qLoad, conn);
                     dr = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
                     while (dr.Read()) list.Add(new true_dr(dr));
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message);
                 }
                 finally { if (dr != null) dr.Close(); }
             }

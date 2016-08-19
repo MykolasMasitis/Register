@@ -45,7 +45,7 @@ END
 GO
 
 CREATE TABLE [dbo].[adr77](
-[recid] int IDENTITY(0,1), [ul] dec(5), [dom] varchar(7), [kor] varchar(5), [str] varchar(5), [kv] varchar(5),
+[recid] int IDENTITY(0,1), [ul] int, [dom] varchar(7), [kor] varchar(5), [str] varchar(5), [kv] varchar(5),
 [created] datetime default sysdatetime(),
 CONSTRAINT [PK_adr77] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO
@@ -303,7 +303,7 @@ GO
 CREATE VIEW kmsview AS SELECT a.recid, a.act,a.pv,a.nz,a.status,a.p_doc,a.p_doc2,a.vs,a.vs_data,a.sn_card,a.enp,a.gz_data,a.q,a.dp,a.dt,a.fam,a.d_type1,
 a.im,a.d_type2,a.ot,a.d_type3,a.w,a.dr,a.true_dr,a.adr_id,a.adr50_id,a.jt,a.scn,a.kl,a.cont,a.c_doc,a.s_doc,a.n_doc,a.d_doc,a.e_doc,a.x_doc,a.u_doc,
 a.snils,a.gr,a.mr,a.d_reg,a.form,a.predst,a.spos,a.d_type4,a.coment,a.ktg,a.gzk_flag,a.doc_flag,a.uec_flag,a.s_card2,a.n_card2,a.is2fio,a.ofioid,
-a.is2doc,a.odocid,a.mcod,a.oper,a.operpv,a.isrereg,a.osmoid,a.permid,a.perm2id,a.enp2id,a.predstid,a.wrkid,a.plant,a.dpok,a.blanc,
+a.is2doc,a.odocid,a.mcod,a.oper,a.operpv,a.isrereg,a.osmoid,a.permid,a.perm2id,a.enp2id,a.predstid,a.wrkid,a.plant,a.dpok,a.blanc,a.created,
 b.ul, b.dom, b.kor, b.str, b.kv, 
 c.c_okato as c_okato, c.ra_name as ra_name, c.np_c as np_c, c.np_name as np_name, c.ul_c as ul_c, c.ul_name as ul_name, 
 c.dom as dom2, c.kor as kor2, c.str as str2, c.kv as kv2, 

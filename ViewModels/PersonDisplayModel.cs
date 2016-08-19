@@ -19,6 +19,7 @@ namespace Register.ViewModels
     {
         public PersonDisplayModel() 
         {
+            //System.Diagnostics.Debugger.Break();
             Messenger messenger = App.Messenger;
             messenger.Register("PersonSelectionChanged", (Action<kms>)(param => ProcessPerson(param)));
             messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
@@ -30,6 +31,7 @@ namespace Register.ViewModels
             ScnItems = scenario.ScnList(App.conString);
             dT4Items = d_type4.dT4List(App.conString);
             TrueDrItems = true_dr.TrueDrList(App.conString);
+            StreetsItems = street.StreetsList(App.conString);
         } //ctor
 
         private bool isSelected = false;
@@ -95,6 +97,13 @@ namespace Register.ViewModels
         {
             get { return _trueDrItems; }
             set { _trueDrItems = value; }
+        }
+
+        private List<street> _streetsItems;
+        public List<street> StreetsItems
+        {
+            get { return _streetsItems; }
+            set { _streetsItems = value; }
         }
 
         private kms displayedPerson = new kms();

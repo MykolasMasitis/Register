@@ -68,3 +68,10 @@ IF OBJECT_ID(@table) IS NOT NULL AND OBJECTPROPERTY(OBJECT_ID(@table), 'IsTable'
 CREATE TABLE [nsi].[true_dr]([recid] int IDENTITY(1,1), [code] tinyint, [name] char(25),
 CONSTRAINT [PK_true_dr] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO
+
+DECLARE @table sysname;
+SET @table = 'nsi.streets';
+IF OBJECT_ID(@table) IS NOT NULL AND OBJECTPROPERTY(OBJECT_ID(@table), 'IsTable')=1 DROP TABLE [nsi].[streets]
+CREATE TABLE [nsi].[streets]([recid] int IDENTITY(1,1), [code] int, [name] char(60),
+CONSTRAINT [PK_streets] PRIMARY KEY CLUSTERED ([recid] ASC))
+GO

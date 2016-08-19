@@ -27,7 +27,7 @@ namespace Register.Model
         {
             hasError = false;
             SqlConnection con = new SqlConnection(App.conString);
-            SqlCommand cmd = new SqlCommand("select top(100) * from kms", con);
+            SqlCommand cmd = new SqlCommand("select top(100) * from kmsview", con);
             cmd.CommandType = CommandType.Text;
 
             MyObservableCollection<kms> persons = new MyObservableCollection<kms>();
@@ -97,7 +97,7 @@ namespace Register.Model
                     reader.GetValue(reader.GetOrdinal("is2doc")) != DBNull.Value ? (string)reader["is2doc"] : string.Empty,
                     reader.GetValue(reader.GetOrdinal("odocid")) != DBNull.Value ? (int)reader["odocid"] : (int)0,
                     reader.GetValue(reader.GetOrdinal("mcod")) != DBNull.Value ? (string)reader["mcod"] : string.Empty,
-                    !reader.IsDBNull(reader.GetOrdinal("oper")) ? (byte)reader["oper"] : new byte(),
+                    reader.IsDBNull(reader.GetOrdinal("oper")) ? (byte)reader["oper"] : new byte(),
                     reader.GetValue(reader.GetOrdinal("operpv")) != DBNull.Value ? (byte)reader["operpv"] : (byte)0,
                     reader.GetValue(reader.GetOrdinal("isrereg")) != DBNull.Value ? (byte)reader["isrereg"] : new byte(),
                     reader.GetValue(reader.GetOrdinal("osmoid")) != DBNull.Value ? (int)reader["osmoid"] : new int(),
@@ -109,7 +109,8 @@ namespace Register.Model
                     reader.GetValue(reader.GetOrdinal("plant")) != DBNull.Value ? (string)reader["plant"] : String.Empty,
                     reader.GetValue(reader.GetOrdinal("dpok")) != DBNull.Value ? (DateTime?)reader["dpok"] : null,
                     reader.GetValue(reader.GetOrdinal("blanc")) != DBNull.Value ? (string)reader["blanc"] : String.Empty,
-                    (DateTime)reader["created"]
+                    (DateTime)reader["created"],
+                    reader.GetValue(reader.GetOrdinal("ul")) != DBNull.Value ? (int)reader["ul"] : new int()
                     );
                     persons.Add(person);
                     nrecs++;

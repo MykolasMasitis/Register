@@ -5,6 +5,11 @@
              xmlns:vw="clr-namespace:Register.Views"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:vm="clr-namespace:Register.ViewModels">
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="VSP">
+            <VirtualizingStackPanel/>
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <vm:PersonDisplayModel />
     </UserControl.DataContext>
@@ -44,6 +49,8 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -175,6 +182,22 @@
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.form, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
+
+                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="0">Улица:</TextBlock>
+                    <ComboBox Margin="5" Grid.Row="11" Grid.Column="1" MinWidth="150"
+                              ItemsSource="{Binding StreetsItems }" ItemsPanel="{StaticResource VSP}"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.ul, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="2">Дом:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="11" Grid.Column="3" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.dom, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="4">Корп:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="11" Grid.Column="5" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.kor, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="6">Кв:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="11" Grid.Column="7" BorderThickness="1"
+                     Text="{Binding Path=DisplayedPerson.kv, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Документ"></TabItem>

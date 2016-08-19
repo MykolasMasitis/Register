@@ -36,6 +36,10 @@ namespace Register.ViewModels
                     dr = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
                     while (dr.Read()) list.Add(new d_type4(dr));
                 }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message);
+                }
                 finally { if (dr != null) dr.Close(); }
             }
             return list;

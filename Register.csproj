@@ -89,6 +89,7 @@
     <Compile Include="ViewModels\predst.cs" />
     <Compile Include="ViewModels\scenario.cs" />
     <Compile Include="ViewModels\status.cs" />
+    <Compile Include="ViewModels\street.cs" />
     <Compile Include="ViewModels\true_dr.cs" />
     <Compile Include="ViewModels\w.cs" />
     <Compile Include="Views\PersonDisplay.xaml.cs">
