@@ -161,29 +161,58 @@
                         </StackPanel>
 
                     </Grid> <!--Четвертая строка закладки-->
-                    <Grid Grid.Row="7" Grid.Column="0">
+                    <Grid Grid.Row="7" Grid.Column="0"> <!--Восьмая строка закладки-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock Margin="7">Признак движения:</TextBlock>
-                            <ComboBox Margin="5" MinWidth="250" 
+                        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
+                            <TextBlock Margin="7" Width="Auto" DockPanel.Dock="Left">Признак движения:</TextBlock>
+                            <ComboBox Margin="5" HorizontalAlignment="Stretch"
                               ItemsSource="{Binding JtItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.jt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Margin="7" Grid.Row="7" Grid.Column="2">Сценарий:</TextBlock>
-                            <ComboBox Margin="5" Grid.Row="7" Grid.Column="3" MinWidth="250" 
+                        </DockPanel>
+                        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+                            <TextBlock Margin="7" Width="Auto" DockPanel.Dock="Left">Сценарий:</TextBlock>
+                            <ComboBox Margin="5" HorizontalAlignment="Stretch"
                               ItemsSource="{Binding ScnItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.scn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
+                        </DockPanel>
+                    </Grid> <!--Восьмая строка закладки-->
+                    <Grid Grid.Row="8" Grid.Column="0"> <!--Девятая строка закладки-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Margin="7">ТИП:</TextBlock>
                         </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="8" Grid.Column="0">
+                        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">КМС:</TextBlock>
+                            <TextBox Margin="5" BorderThickness="1"
+                                Text="{Binding Path=DisplayedPerson.sn_card, UpdateSourceTrigger=PropertyChanged}">
+                            </TextBox>
+                        </DockPanel>
+                        <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">ВС:</TextBlock>
+                            <TextBox Margin="5" BorderThickness="1"
+                                Text="{Binding Path=DisplayedPerson.vs, UpdateSourceTrigger=PropertyChanged}">
+                            </TextBox>
+                        </DockPanel>
+                        <DockPanel Grid.Row="0" Grid.Column="3" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">ЕНП:</TextBlock>
+                            <TextBox Margin="5" BorderThickness="1"
+                                Text="{Binding Path=DisplayedPerson.enp, UpdateSourceTrigger=PropertyChanged}">
+                            </TextBox>
+                        </DockPanel>
+                    </Grid> <!--Девятая строка закладки-->
+                    <Grid Grid.Row="9" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -227,38 +256,72 @@
                               SelectedValuePath="code">
                         </ComboBox>
                     </Grid>
-
-                    <!--
-                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="0">Дата рождения:</TextBlock>
-                    <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="5"
-                                BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
-                                SelectedDate="{Binding Path=DisplayedPerson.dr, Mode=TwoWay}"/>
-                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="2">Достоверность даты:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="5" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding TrueDrItems }"
-                              DisplayMemberPath="name" 
-                              SelectedValue="{Binding DisplayedPerson.true_dr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="code"/>
-
-                    <TextBlock Margin="7" Grid.Row="5" Grid.Column="6">Пол:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="5" Grid.Column="7" MinWidth="150" 
+                    <Grid Grid.Row="10" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Пол:</TextBlock>
+                            <ComboBox Margin="5"  
                               ItemsSource="{Binding WItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.w, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Дата рождения:</TextBlock>
+                            <DatePicker HorizontalAlignment="Left" Margin="5"
+                                BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
+                                SelectedDate="{Binding Path=DisplayedPerson.dr, Mode=TwoWay}"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left" >Достоверность даты:</TextBlock>
+                            <ComboBox Margin="5"  
+                              ItemsSource="{Binding TrueDrItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.true_dr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+                        </DockPanel>
+                    </Grid>
+                    <Grid Grid.Row="11" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="0" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Улица:</TextBlock>
+                            <ComboBox Margin="5" Grid.Row="11" Grid.Column="1" MinWidth="150"
+                              ItemsSource="{Binding StreetsItems }" ItemsPanel="{StaticResource VSP}"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.ul, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+                        </DockPanel>
+                        <DockPanel Grid.Column="1" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Дом:</TextBlock>
+                            <TextBox Margin="5" Grid.Row="11" Grid.Column="3" BorderThickness="1"
+                                Text="{Binding Path=DisplayedPerson.dom, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </DockPanel>
+                        <DockPanel Grid.Column="2" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Корп:</TextBlock>
+                            <TextBox Margin="5" Grid.Row="11" Grid.Column="5" BorderThickness="1"
+                                Text="{Binding Path=DisplayedPerson.kor, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </DockPanel>
+                        <DockPanel Grid.Column="3" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Стр:</TextBlock>
+                        </DockPanel>
+                        <DockPanel Grid.Column="4" LastChildFill="True">
+                            <TextBlock Margin="7" DockPanel.Dock="Left">Кв:</TextBlock>
+                            <TextBox Margin="5" BorderThickness="1"
+                                Text="{Binding Path=DisplayedPerson.kv, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </DockPanel>
+                    </Grid>
 
-                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="0">ТИП:</TextBlock>
-                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="2">ВС:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="6" Grid.Column="3" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.vs, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="4">КМС:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="6" Grid.Column="5" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.sn_card, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="6" Grid.Column="6">КМС:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="6" Grid.Column="7" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.enp, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-
-
+                    <!--
                     <TextBlock Margin="7" Grid.Row="8" Grid.Column="0">СНИЛС:</TextBlock>
                     <TextBox Margin="5" Grid.Row="8" Grid.Column="1" BorderThickness="1"
                      Text="{Binding Path=DisplayedPerson.snils, UpdateSourceTrigger=PropertyChanged}"></TextBox>
@@ -270,21 +333,6 @@
                               SelectedValue="{Binding DisplayedPerson.form, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
 
-                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="0">Улица:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="11" Grid.Column="1" MinWidth="150"
-                              ItemsSource="{Binding StreetsItems }" ItemsPanel="{StaticResource VSP}"
-                              DisplayMemberPath="name" 
-                              SelectedValue="{Binding DisplayedPerson.ul, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="code"/>
-                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="2">Дом:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="11" Grid.Column="3" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.dom, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="4">Корп:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="11" Grid.Column="5" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.kor, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="11" Grid.Column="6">Кв:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="11" Grid.Column="7" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.kv, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     -->
                 </Grid>
             </TabItem>
