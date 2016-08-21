@@ -11,13 +11,7 @@ namespace Register.ViewModels
         public byte code { get; set; }
         public string name { get; set; }
         public bool used { get; set; }
-        /*
-        private status()
-        {
-            name = string.Empty;
-            used = false;
-        }
-        */
+
         public status(SqlDataReader reader)
         {
             recid = reader.GetInt32(reader.GetOrdinal("recid"));
@@ -26,17 +20,12 @@ namespace Register.ViewModels
                 code = reader.GetByte(reader.GetOrdinal("code"));
 
             if (reader.GetValue(reader.GetOrdinal("name")) != DBNull.Value)
-                name = reader.GetString(reader.GetOrdinal("name"));
+                name = reader.GetString(reader.GetOrdinal("name")).PadLeft(25);
 
             if (reader.GetValue(reader.GetOrdinal("used")) != DBNull.Value)
                 used = reader.GetBoolean(reader.GetOrdinal("used"));
         }
-        /*
-        public override string ToString()
-        {
-            return string.Format("{0}", name);
-        }
-        */
+
         public static List<status> StatusList(string strConn)
         {
             List<status> list = new List<status>();

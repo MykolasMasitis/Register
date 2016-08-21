@@ -38,17 +38,10 @@
         <TabControl Margin="10" Grid.Row="1">
             <TabItem Header="Основная информация">
                 <Grid Margin="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <Grid.ColumnDefinitions> <!-- 1 столбец! -->
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
+                    <Grid.RowDefinitions> <!-- 16 строк -->
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -67,66 +60,175 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Margin="7" Grid.Row="0" Grid.Column="0">Дата актуализации:</TextBlock>
-                    <DatePicker Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="5"
+                    <Grid Grid.Row="0" Grid.Column="0"> <!-- Первая строка закладки -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="7" Text="Дата актуализации:"></TextBlock>
+                            <DatePicker Margin="5"
                                 BorderBrush="{Binding Path=Stat.DpBrush}" BorderThickness="1" 
                                 SelectedDate="{Binding Path=DisplayedPerson.dp, Mode=TwoWay}"/>
-
-                    <TextBlock Margin="7" Grid.Row="0" Grid.Column="2">Обратился:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="0" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding PredstItems }"
-                              DisplayMemberPath="name" 
+                            <Button Height="30" Width="30" Content="!"></Button>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Margin="7">Статус:</TextBlock>
+                            <ComboBox Margin="5" ItemsSource="{Binding StatusItems }" DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code" UseLayoutRounding="False" MinWidth="200"/>
+                        </StackPanel>
+                        <!--
+                        <TextBlock Margin="7">Обратился:</TextBlock>
+                        <ComboBox Margin="5" MinWidth="100" ItemsSource="{Binding PredstItems }" DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.predst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"></ComboBox>
+                        -->
+                    </Grid> <!-- Первая строка закладки -->
 
-                    <TextBlock Margin="7" Grid.Row="0" Grid.Column="6">Статус:</TextBlock>
-                    <ComboBox x:Name="cmbStatus" Margin="5" Grid.Row="0" Grid.Column="7" MinWidth="150" 
-                              ItemsSource="{Binding StatusItems }"
-                              DisplayMemberPath="name" 
-                              SelectedValue="{Binding DisplayedPerson.status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="code"></ComboBox>
-
-                    <TextBlock Margin="7" Grid.Row="1" Grid.Column="0">Ошибка:</TextBlock>
-                    <TextBlock Margin="7" Grid.Row="1" Grid.Column="2">Заявка:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="1" Grid.Column="3" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.nz, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="1" Grid.Column="6">Дата выдачи:</TextBlock>
-                    <DatePicker Grid.Row="1" Grid.Column="7" HorizontalAlignment="Left" Margin="5"
+                    <Grid Grid.Row="1" Grid.Column="0"> <!--Вторая строка закладки-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="7">Ошибка:</TextBlock>
+                            <TextBox MinWidth="50" BorderThickness="1" Height="25"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Margin="7">Заявка:</TextBlock>
+                            <TextBox Margin="5" MinWidth="50" BorderThickness="1" Text="{Binding Path=DisplayedPerson.nz,
+                            Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <TextBlock Margin="7" >Дата выдачи:</TextBlock>
+                            <DatePicker Grid.Row="1" Grid.Column="7" HorizontalAlignment="Left" Margin="5"
                                 BorderThickness="1"
                                 SelectedDate="{Binding Path=DisplayedPerson.dpok, Mode=TwoWay}"/>
+                            <Button Height="30" Width="30" Content="!"></Button>
+                        </StackPanel>
+                    </Grid> <!-- Вторая строка закладки -->
 
-                    <TextBlock Margin="7" Grid.Row="2" Grid.Column="0">Фамилия:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="2" Grid.Column="1" BorderBrush="{Binding Path=Stat.FamBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.fam, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="2" Grid.Column="2">Особый случай:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="2" Grid.Column="3" MinWidth="150" 
+                    <!--
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Margin="7">Обратился:</TextBlock>
+                        <ComboBox Margin="5" MinWidth="100" ItemsSource="{Binding PredstItems }" DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.predst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"></ComboBox>
+                    </StackPanel>
+                    -->
+
+                    <Grid Grid.Row="2" Grid.Column="0"> <!--Третья строка закладки-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="7">Подано в файле:</TextBlock>
+                            <TextBox MinWidth="50" Height="25"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Margin="7">Принято в файле:</TextBlock>
+                            <TextBox MinWidth="50" Height="25"></TextBox>
+                        </StackPanel>
+                    </Grid> <!--Третья строка закладки-->
+                    <Grid Grid.Row="3" Grid.Column="0"> <!--Четвертая строка закладки-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="7">Обратился:</TextBlock>
+                            <ComboBox Margin="5" MinWidth="100" ItemsSource="{Binding PredstItems }" DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.predst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"></ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Margin="7">Вид заказываемого полиса:</TextBlock>
+
+                        </StackPanel>
+
+                    </Grid> <!--Четвертая строка закладки-->
+                    <Grid Grid.Row="7" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="7">Признак движения:</TextBlock>
+                            <ComboBox Margin="5" MinWidth="250" 
+                              ItemsSource="{Binding JtItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.jt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Margin="7" Grid.Row="7" Grid.Column="2">Сценарий:</TextBlock>
+                            <ComboBox Margin="5" Grid.Row="7" Grid.Column="3" MinWidth="250" 
+                              ItemsSource="{Binding ScnItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.scn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="8" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="7" Text="Фамилия :"></TextBlock>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" MinWidth="250" BorderBrush="{Binding Path=Stat.FamBrush}" BorderThickness="1"
+                            Text="{Binding Path=DisplayedPerson.fam, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Margin="7">Особый случай:</TextBlock>
+                        <ComboBox Grid.Row="0" Grid.Column="3" Margin="5" MinWidth="250" 
                               ItemsSource="{Binding CodFioItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.d_type1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"></ComboBox>
 
-                    <TextBlock Margin="7" Grid.Row="3" Grid.Column="0">Имя:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="3" Grid.Column="1" BorderBrush="{Binding Path=Stat.ImBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.im, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="3" Grid.Column="2">Особый случай:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="3" Grid.Column="3" MinWidth="150" 
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="7"  Text="Имя      :"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" BorderBrush="{Binding Path=Stat.ImBrush}" BorderThickness="1"
+                            Text="{Binding Path=DisplayedPerson.im, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Margin="7" >Особый случай:</TextBlock>
+                        <ComboBox Grid.Row="1" Grid.Column="3" Margin="5" MinWidth="150" 
                               ItemsSource="{Binding CodFioItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.d_type2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"></ComboBox>
 
-                    <TextBlock Margin="7" Grid.Row="4" Grid.Column="0">Отчество:</TextBlock>
-                    <TextBox Margin="5" Grid.Row="4" Grid.Column="1" BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedPerson.ot, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="4" Grid.Column="2">Особый случай:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="4" Grid.Column="3" MinWidth="150" 
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="7" Text="Отчество:" ></TextBlock>
+                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1"
+                            Text="{Binding Path=DisplayedPerson.ot, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Margin="7" >Особый случай:</TextBlock>
+                        <ComboBox Grid.Row="2" Grid.Column="3" Margin="5"  MinWidth="150" 
                               ItemsSource="{Binding CodFioItems }"
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.d_type3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code">
-                        
-                    </ComboBox>
+                        </ComboBox>
+                    </Grid>
 
+                    <!--
                     <TextBlock Margin="7" Grid.Row="5" Grid.Column="0">Дата рождения:</TextBlock>
                     <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="5"
                                 BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
@@ -156,25 +258,10 @@
                     <TextBox Margin="5" Grid.Row="6" Grid.Column="7" BorderThickness="1"
                      Text="{Binding Path=DisplayedPerson.enp, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                    <TextBlock Margin="7" Grid.Row="7" Grid.Column="0">Признак движения:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="7" Grid.Column="1" MinWidth="150" 
-                              ItemsSource="{Binding JtItems }"
-                              DisplayMemberPath="name" 
-                              SelectedValue="{Binding DisplayedPerson.jt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="code"/>
 
-                    <TextBlock Margin="7" Grid.Row="7" Grid.Column="2">Сценарий:</TextBlock>
-                    <ComboBox Margin="5" Grid.Row="7" Grid.Column="3" MinWidth="150" 
-                              ItemsSource="{Binding ScnItems }"
-                              DisplayMemberPath="name" 
-                              SelectedValue="{Binding DisplayedPerson.scn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="code"/>
                     <TextBlock Margin="7" Grid.Row="8" Grid.Column="0">СНИЛС:</TextBlock>
                     <TextBox Margin="5" Grid.Row="8" Grid.Column="1" BorderThickness="1"
                      Text="{Binding Path=DisplayedPerson.snils, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBlock Margin="7" Grid.Row="9" Grid.Column="0">Подано в файле:</TextBlock>
-
-                    <TextBlock Margin="7" Grid.Row="9" Grid.Column="2">Принято в файле:</TextBlock>
 
                     <TextBlock Margin="7" Grid.Row="10" Grid.Column="0">d_type4:</TextBlock>
                     <ComboBox Margin="5" Grid.Row="10" Grid.Column="1" MinWidth="150" 
@@ -198,6 +285,7 @@
                     <TextBlock Margin="7" Grid.Row="11" Grid.Column="6">Кв:</TextBlock>
                     <TextBox Margin="5" Grid.Row="11" Grid.Column="7" BorderThickness="1"
                      Text="{Binding Path=DisplayedPerson.kv, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    -->
                 </Grid>
             </TabItem>
             <TabItem Header="Документ"></TabItem>
