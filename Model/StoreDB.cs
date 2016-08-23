@@ -109,8 +109,24 @@ namespace Register.Model
                     reader.GetValue(reader.GetOrdinal("plant")) != DBNull.Value ? (string)reader["plant"] : String.Empty,
                     reader.GetValue(reader.GetOrdinal("dpok")) != DBNull.Value ? (DateTime?)reader["dpok"] : null,
                     reader.GetValue(reader.GetOrdinal("blanc")) != DBNull.Value ? (string)reader["blanc"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("photo")) != DBNull.Value ? (byte[])reader["photo"] : null,
+                    reader.GetValue(reader.GetOrdinal("sign")) != DBNull.Value ? (byte[])reader["sign"] : null,
                     (DateTime)reader["created"],
-                    reader.GetValue(reader.GetOrdinal("ul")) != DBNull.Value ? (int)reader["ul"] : new int()
+                    reader.GetValue(reader.GetOrdinal("ul")) != DBNull.Value ? (int)reader["ul"] : new int(),
+                    reader.GetValue(reader.GetOrdinal("dom")) != DBNull.Value ? (string)reader["dom"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("kor")) != DBNull.Value ? (string)reader["kor"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("str")) != DBNull.Value ? (string)reader["str"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("kv")) != DBNull.Value ? (string)reader["kv"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("c_perm")) != DBNull.Value ? (byte)reader["c_perm"] : new byte(),
+                    reader.GetValue(reader.GetOrdinal("s_perm")) != DBNull.Value ? (string)reader["s_perm"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("n_perm")) != DBNull.Value ? (string)reader["n_perm"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("d_perm")) != DBNull.Value ? (DateTime?)reader["d_perm"] : null,
+                    reader.GetValue(reader.GetOrdinal("e_perm")) != DBNull.Value ? (DateTime?)reader["e_perm"] : null,
+                    reader.GetValue(reader.GetOrdinal("c_perm2")) != DBNull.Value ? (byte)reader["c_perm2"] : new byte(),
+                    reader.GetValue(reader.GetOrdinal("s_perm2")) != DBNull.Value ? (string)reader["s_perm2"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("n_perm2")) != DBNull.Value ? (string)reader["n_perm2"] : String.Empty,
+                    reader.GetValue(reader.GetOrdinal("d_perm2")) != DBNull.Value ? (DateTime?)reader["d_perm2"] : null,
+                    reader.GetValue(reader.GetOrdinal("e_perm2")) != DBNull.Value ? (DateTime?)reader["e_perm2"] : null
                     );
                     persons.Add(person);
                     nrecs++;
@@ -194,8 +210,20 @@ namespace Register.Model
             cmd.Parameters["@dr"].Value = p.dr;
             cmd.Parameters.Add("@true_dr", SqlDbType.TinyInt);
             cmd.Parameters["@true_dr"].Value = p.true_dr;
+
             cmd.Parameters.Add("@adr_id", SqlDbType.Int, 4);
             cmd.Parameters["@adr_id"].Value = p.adr_id;
+            cmd.Parameters.Add("@ul", SqlDbType.Int, 4);
+            cmd.Parameters["@ul"].Value = p.ul;
+            cmd.Parameters.Add("@dom", SqlDbType.VarChar, 7);
+            cmd.Parameters["@dom"].Value = p.dom;
+            cmd.Parameters.Add("@kor", SqlDbType.VarChar, 5);
+            cmd.Parameters["@kor"].Value = p.kor;
+            cmd.Parameters.Add("@str", SqlDbType.VarChar, 5);
+            cmd.Parameters["@str"].Value = p.str;
+            cmd.Parameters.Add("@kv", SqlDbType.VarChar, 5);
+            cmd.Parameters["@kv"].Value = p.kv;
+
             cmd.Parameters.Add("@adr50_id", SqlDbType.Int, 4);
             cmd.Parameters["@adr50_id"].Value = p.adr50_id;
             cmd.Parameters.Add("@jt", SqlDbType.VarChar, 1);

@@ -83,6 +83,8 @@
     <Compile Include="ViewModels\d_type4.cs" />
     <Compile Include="ViewModels\jt.cs" />
     <Compile Include="ViewModels\kms.cs" />
+    <Compile Include="ViewModels\permis2.cs" />
+    <Compile Include="ViewModels\permiss.cs" />
     <Compile Include="ViewModels\PersonDisplayModel.cs" />
     <Compile Include="ViewModels\PersonDisplayModelStatus.cs" />
     <Compile Include="ViewModels\PersonSelectionModel.cs" />

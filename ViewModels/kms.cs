@@ -480,6 +480,13 @@ namespace Register.ViewModels
             set { _photo = value; NotifyPropertyChanged("photo"); }
         }
 
+        private byte[] _sign;
+        public byte[] sign
+        {
+            get { return _sign; }
+            set { _sign = value; NotifyPropertyChanged("sign"); }
+        }
+
         public DateTime created { get; set; }
 
         private int? _ul;
@@ -488,7 +495,105 @@ namespace Register.ViewModels
             get { return _ul; }
             set { _ul = value; NotifyPropertyChanged("ul"); }
         }
-        
+
+        private string _dom;
+        public string dom
+        {
+            get { return _dom; }
+            set { _dom = value; NotifyPropertyChanged("dom"); }
+        }
+
+        private string _kor;
+        public string kor
+        {
+            get { return _kor; }
+            set { _kor = value; NotifyPropertyChanged("kor"); }
+        }
+
+        private string _str;
+        public string str
+        {
+            get { return _str; }
+            set { _str = value; NotifyPropertyChanged("str"); }
+        }
+
+        private string _kv;
+        public string kv
+        {
+            get { return _kv; }
+            set { _kv = value; NotifyPropertyChanged("kv"); }
+        }
+
+        private byte _c_perm;
+        public byte c_perm
+        {
+            get { return _c_perm; }
+            set { _c_perm = value; NotifyPropertyChanged("c_perm"); }
+        }
+
+        private string _s_perm;
+        public string s_perm
+        {
+            get { return _s_perm; }
+            set { _s_perm = value; NotifyPropertyChanged("s_perm"); }
+        }
+
+        private string _n_perm;
+        public string n_perm
+        {
+            get { return _n_perm; }
+            set { _n_perm = value; NotifyPropertyChanged("n_perm"); }
+        }
+
+        private DateTime? _d_perm;
+        public DateTime? d_perm
+        {
+            get { return _d_perm; }
+            set { _d_perm = value; NotifyPropertyChanged("d_perm"); }
+        }
+
+        private DateTime? _e_perm;
+        public DateTime? e_perm
+        {
+            get { return _e_perm; }
+            set { _e_perm = value; NotifyPropertyChanged("e_perm"); }
+        }
+
+        private byte _c_perm2;
+        public byte c_perm2
+        {
+            get { return _c_perm2; }
+            set { _c_perm2 = value; NotifyPropertyChanged("c_perm2"); }
+        }
+
+        private string _s_perm2;
+        public string s_perm2
+        {
+            get { return _s_perm2; }
+            set { _s_perm2 = value; NotifyPropertyChanged("s_perm2"); }
+        }
+
+        private string _n_perm2;
+        public string n_perm2
+        {
+            get { return _n_perm2; }
+            set { _n_perm2 = value; NotifyPropertyChanged("n_perm2"); }
+        }
+
+        private DateTime? _d_perm2;
+        public DateTime? d_perm2
+        {
+            get { return _d_perm2; }
+            set { _d_perm2 = value; NotifyPropertyChanged("d_perm2"); }
+        }
+
+        private DateTime? _e_perm2;
+        public DateTime? e_perm2
+        {
+            get { return _e_perm2; }
+            set { _e_perm2 = value; NotifyPropertyChanged("e_perm2"); }
+        }
+
         #endregion #Fields
 
         public void CopyPerson(kms p)
@@ -562,8 +667,19 @@ namespace Register.ViewModels
             this.plant = p.plant;
             this.dpok = p.dpok;
             this.blanc = p.blanc;
+            this.photo = p.photo;
+            this.sign = p.sign;
             this.created = p.created;
             this.ul = p.ul;
+            this.dom = p.dom;
+            this.kor = p.kor;
+            this.str = p.str;
+            this.kv = p.kv;
+            this.c_perm = p.c_perm;
+            this.s_perm = p.s_perm;
+            this.n_perm = p.n_perm;
+            this.d_perm = p.d_perm;
+            this.e_perm = p.e_perm;
         }
 
         #region Constructors
@@ -579,7 +695,10 @@ namespace Register.ViewModels
             string _coment, string _ktg, byte _gzk_flag, byte _doc_flag, string _uec_flag, string _s_card2,
             string _n_card2, string _is2fio, int? _ofioid, string _is2doc, int? _odocid, string _mcod, byte? _oper,
             byte? _operpv, byte? _isrereg, int? _osmoid, int? _permid, int? _perm2id, int? _enp2id, int? _predstid,
-            int? _wrkid, string _plant, DateTime? _dpok, string _blanc, DateTime _created, int? _ul)
+            int? _wrkid, string _plant, DateTime? _dpok, string _blanc, byte[] _photo, byte[] _sign, DateTime _created, int? _ul, string _dom,
+            string _kor, string _str, string _kv, byte _c_perm, string _s_perm, string _n_perm, DateTime? _d_perm,
+            DateTime? _e_perm, byte _c_perm2, string _s_perm2, string _n_perm2, DateTime? _d_perm2,
+            DateTime? _e_perm2)
         {   recid = _recid; act = _act; pv = _pv; nz = _nz; status = _status; p_doc = _p_doc; p_doc2 = _p_doc2;
             vs = _vs; vs_data = _vs_data; sn_card = _sn_card; enp = _enp; gz_data = _gz_data; q = _q; dp = _dp;
             dt = _dt; fam = _fam; d_type1 = _d_type1; im = _im; d_type2 = _d_type2; ot = _ot; d_type3 = _d_type3;
@@ -590,8 +709,10 @@ namespace Register.ViewModels
             doc_flag = _doc_flag; uec_flag = _uec_flag; s_card2 = _s_card2; n_card2 = _n_card2; is2fio = _is2fio;
             ofioid = _ofioid; is2doc = _is2doc; odocid = _odocid; mcod = _mcod; oper = _oper; operpv = _operpv;
             isrereg = _isrereg; osmoid = _osmoid; permid = _permid; perm2id = _perm2id; enp2id = _enp2id;
-            predstid = _predstid; wrkid = _wrkid; plant = _plant; dpok = _dpok; blanc = _blanc; created=_created;
-            ul = _ul;
+            predstid = _predstid; wrkid = _wrkid; plant = _plant; dpok = _dpok; blanc = _blanc; photo = _photo;
+            sign = _sign; created =_created; ul = _ul; dom = _dom; kor = _kor; str = _str; kv = _kv; c_perm = _c_perm;
+            s_perm = _s_perm ; n_perm = _n_perm; d_perm = _d_perm; e_perm = _e_perm; c_perm2 = _c_perm2;
+            s_perm2 = _s_perm2; n_perm2 = _n_perm2; d_perm2 = _d_perm2; e_perm2 = _e_perm2;
         }
         #endregion Constructors
         #region Implemented Interface

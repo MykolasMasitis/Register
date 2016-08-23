@@ -32,6 +32,8 @@ namespace Register.ViewModels
             dT4Items = d_type4.dT4List(App.conString);
             TrueDrItems = true_dr.TrueDrList(App.conString);
             StreetsItems = street.StreetsList(App.conString);
+            PermissItems = permiss.PermissList();
+            Permis2Items = permis2.Permis2List();
         } //ctor
 
         private bool isSelected = false;
@@ -104,6 +106,20 @@ namespace Register.ViewModels
         {
             get { return _streetsItems; }
             set { _streetsItems = value; }
+        }
+
+        private List<permiss> _permissItems;
+        public List<permiss> PermissItems
+        {
+            get { return _permissItems; }
+            set { _permissItems = value; }
+        }
+
+        private List<permis2> _permis2Items;
+        public List<permis2> Permis2Items
+        {
+            get { return _permis2Items; }
+            set { _permis2Items = value; }
         }
 
         private kms displayedPerson = new kms();

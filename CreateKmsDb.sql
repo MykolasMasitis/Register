@@ -45,7 +45,7 @@ END
 GO
 
 CREATE TABLE [dbo].[adr77](
-[recid] int IDENTITY(0,1), [ul] int, [dom] varchar(7), [kor] varchar(5), [str] varchar(5), [kv] varchar(5),
+[recid] int IDENTITY(0,1), [ul] int NOT NULL, [dom] varchar(7), [kor] varchar(5), [str] varchar(5), [kv] varchar(5),
 [created] datetime default sysdatetime(),
 CONSTRAINT [PK_adr77] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO
@@ -53,14 +53,36 @@ INSERT INTO [adr77] (ul, dom, kor, str, kv) VALUES (0, '', '', '', '')
 GO
 CREATE UNIQUE INDEX unik ON adr77 (ul, dom, kor, str, kv)
 GO
-CREATE PROCEDURE [dbo].[seekadr77]
-(
-@ul dec(5)=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='', @recid int=0 out
-)
+
+CREATE FUNCTION [dbo].[seekadr77](@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='')
+RETURNS int
+BEGIN
+ DECLARE @recid int
+ SELECT @recid=recid FROM adr77 WHERE ul=@ul AND dom=@dom AND kor=@kor AND str=@str AND kv=@kv
+
+ SET @recid=CASE WHEN @recid IS NULL THEN 0 ELSE @recid END 
+
+ RETURN @recid
+END
+GO 
+
+--CREATE PROCEDURE [dbo].[seekadr77](@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='',
+-- @recid int out)
+--AS
+--BEGIN
+--SET NOCOUNT ON;
+--SELECT @recid = recid FROM adr77 WHERE ul=@ul AND dom=@dom AND kor=@kor AND str=@str AND kv=@kv;
+--END
+--GO
+
+CREATE PROCEDURE [dbo].[addadr77] (
+@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='', @recid int out)
 AS
 BEGIN
 SET NOCOUNT ON;
-SELECT recid FROM adr77 WHERE ul=@ul AND dom=@dom AND kor=@kor AND str=@str AND kv=@kv;
+INSERT INTO [dbo].[adr77] (ul,dom,kor,str,kv) VALUES (@ul,@dom,@kor,@str,@kv)
+SET @recid = SCOPE_IDENTITY()
+RETURN @recid
 END
 GO
 
@@ -175,28 +197,54 @@ SELECT recid FROM osmo WHERE ogrn=@ogrn AND okato=@okato;
 END
 GO
 
+-- Permiss
 CREATE TABLE [dbo].[permiss](
 [recid] int IDENTITY(0,1),
-[c_perm] tinyint NOT NULL, [s_perm] varchar(9) NOT NULL, [n_perm] varchar(8) NOT NULL, [d_perm] date NOT NULL, [e_perm] date NOT NULL,
+[c_perm] tinyint NOT NULL, [s_perm] varchar(9) NOT NULL, [n_perm] varchar(8) NOT NULL, [d_perm] date, [e_perm] date,
 [created] datetime default sysdatetime() NOT NULL,
 CONSTRAINT [PK_permiss] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO
-ALTER TABLE [dbo].[permiss] WITH NOCHECK ADD CONSTRAINT [CK_permiss_c_perm] CHECK (c_perm IN (11,23,25))
+ALTER TABLE [dbo].[permiss] WITH NOCHECK ADD CONSTRAINT [CK_permiss_c_perm] CHECK (c_perm IN (0,11,23,25))
 GO
-/*INSERT INTO permiss (c_perm,s_perm,n_perm,d_perm,e_perm) values (0,'','',NULL,NULL)*/
+INSERT INTO permiss (c_perm,s_perm,n_perm,d_perm,e_perm) values (0,'','',NULL,NULL)
 GO
 CREATE UNIQUE INDEX sn_perm ON permiss (s_perm, n_perm)
 GO
-CREATE PROCEDURE [dbo].[seekpermiss]
-(
-@s_perm varchar(9)='', @n_perm varchar(8)='', @recid int=NULL out
-)
+
+CREATE FUNCTION [dbo].[seekpermiss](@s_perm varchar(9)='', @n_perm varchar(8)='')
+RETURNS int
+BEGIN
+ DECLARE @recid int
+ SELECT @recid=recid FROM permiss WHERE s_perm=@s_perm AND n_perm=@n_perm;
+
+ SET @recid=CASE WHEN @recid IS NULL THEN 0 ELSE @recid END 
+
+ RETURN @recid
+END
+GO 
+
+CREATE PROCEDURE [dbo].[addpermiss] (@c_perm tinyint=0, @s_perm varchar(9)='', @n_perm varchar(8)='', @d_perm date=null, @e_perm date=null)
 AS
 BEGIN
 SET NOCOUNT ON;
-SELECT recid FROM permiss WHERE s_perm=@s_perm AND n_perm=@n_perm;
+DECLARE @recid int
+INSERT INTO [dbo].[permiss] (c_perm, s_perm, n_perm, d_perm, e_perm) VALUES (@c_perm, @s_perm, @n_perm, @d_perm, @e_perm)
+SET @recid = SCOPE_IDENTITY()
+RETURN @recid
 END
 GO
+-- Permiss
+
+--CREATE PROCEDURE [dbo].[seekpermiss]
+--(
+--@s_perm varchar(9)='', @n_perm varchar(8)='', @recid int=NULL out
+--)
+--AS
+--BEGIN
+--SET NOCOUNT ON;
+--SELECT recid FROM permiss WHERE s_perm=@s_perm AND n_perm=@n_perm;
+--END
+--GO
 
 CREATE TABLE [dbo].[permis2](
 [recid] int IDENTITY(0,1),
@@ -276,7 +324,7 @@ snils varchar(14), gr varchar(3), mr varchar(max), d_reg date, form tinyint NOT 
 spos tinyint NOT NULL DEFAULT 1, d_type4 tinyint, coment varchar(max), ktg varchar(1), gzk_flag tinyint, doc_flag tinyint,
 uec_flag varchar(1), s_card2 varchar(12), n_card2 varchar(32), is2fio varchar(1), ofioid int, is2doc varchar(1), odocid int,
 mcod varchar(7), oper tinyint, operpv tinyint, isrereg tinyint, osmoid int, permid int, perm2id int, enp2id int, predstid int,
-wrkid int, plant varchar(5), dpok date, blanc varchar(11), photo varbinary(max), [created] datetime default sysdatetime(),
+wrkid int, plant varchar(5), dpok date, blanc varchar(11), photo varbinary(max), [sign] varbinary(max), [created] datetime default sysdatetime(),
 CONSTRAINT [PK_kms] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO
 CREATE INDEX fio ON kms (fam,im,ot)
@@ -303,7 +351,7 @@ GO
 CREATE VIEW kmsview AS SELECT a.recid, a.act,a.pv,a.nz,a.status,a.p_doc,a.p_doc2,a.vs,a.vs_data,a.sn_card,a.enp,a.gz_data,a.q,a.dp,a.dt,a.fam,a.d_type1,
 a.im,a.d_type2,a.ot,a.d_type3,a.w,a.dr,a.true_dr,a.adr_id,a.adr50_id,a.jt,a.scn,a.kl,a.cont,a.c_doc,a.s_doc,a.n_doc,a.d_doc,a.e_doc,a.x_doc,a.u_doc,
 a.snils,a.gr,a.mr,a.d_reg,a.form,a.predst,a.spos,a.d_type4,a.coment,a.ktg,a.gzk_flag,a.doc_flag,a.uec_flag,a.s_card2,a.n_card2,a.is2fio,a.ofioid,
-a.is2doc,a.odocid,a.mcod,a.oper,a.operpv,a.isrereg,a.osmoid,a.permid,a.perm2id,a.enp2id,a.predstid,a.wrkid,a.plant,a.dpok,a.blanc,a.created,
+a.is2doc,a.odocid,a.mcod,a.oper,a.operpv,a.isrereg,a.osmoid,a.permid,a.perm2id,a.enp2id,a.predstid,a.wrkid,a.plant,a.dpok,a.blanc,a.photo,a.sign,a.created,
 b.ul, b.dom, b.kor, b.str, b.kv, 
 c.c_okato as c_okato, c.ra_name as ra_name, c.np_c as np_c, c.np_name as np_name, c.ul_c as ul_c, c.ul_name as ul_name, 
 c.dom as dom2, c.kor as kor2, c.str as str2, c.kv as kv2, 
@@ -377,37 +425,50 @@ BEGIN CATCH
 END CATCH
 GO 
 
-CREATE PROCEDURE [dbo].[UpdatePerson]
-(
+CREATE PROCEDURE [dbo].[UpdatePerson](
 @recid int OUTPUT, @act bit, @pv varchar(3)=null, @nz varchar(5)=null, @status tinyint, @p_doc tinyint=0,
 @p_doc2 tinyint=0, @vs varchar(9)=null, @vs_data date=null, @sn_card varchar(17)=null, @enp varchar(16)=null,
 @gz_data date=null, @q varchar(2)=null, @dp date=null, @dt date=null, @fam varchar(40)=null, @d_type1 varchar(1)=' ',
 @im varchar(40)=null, @d_type2 varchar(1)=' ',@ot varchar(40)=null, @d_type3 varchar(1)=' ', @w tinyint, @dr date=null,
-@true_dr tinyint=null, @adr_id int=null , @adr50_id int=null,@jt varchar(1)=null, @scn varchar(3)=null,
+@true_dr tinyint=null,
+@adr_id int=null, @ul int=0, @dom varchar(7)=null, @kor varchar(5)=null, @str varchar(5)=null, @kv varchar(5) = null,
+@adr50_id int=null,@jt varchar(1)=null, @scn varchar(3)=null,
 @kl tinyint=0, @cont varchar(40)=null, @c_doc tinyint=0, @s_doc varchar(9)=null, @n_doc varchar(8)=null,
 @d_doc date=null,@e_doc date=null, @x_doc tinyint=0, @u_doc varchar(max)=null, @snils varchar(14)=null,
 @gr varchar(3)=null, @mr varchar(max)=null, @d_reg date=null, @form tinyint=0,@predst varchar(1)='0',
 @spos tinyint=0, @d_type4 tinyint=0, @coment varchar(max)=null, @ktg varchar(1)=null, @gzk_flag tinyint=0,
 @doc_flag tinyint, @uec_flag varchar(1)=null,@s_card2 varchar(12)=null, @n_card2 varchar(32)=null,
 @is2fio varchar(1)=null, @ofioid int=0, @is2doc varchar(1)=null, @odocid int=0,@mcod varchar(7)=null,
-@oper tinyint=0, @operpv tinyint=0, @isrereg tinyint=0, @osmoid int=0, @permid int=0, @perm2id int=0,
+@oper tinyint=0, @operpv tinyint=0, @isrereg tinyint=0, @osmoid int=0,
+@permid int=0, @c_perm tinyint=0, @s_perm varchar(9)='', @n_perm varchar(8)='', @d_perm date=null, @e_perm date=null,
+@perm2id int=0,
 @enp2id int=0, @predstid int=0, @wrkid int=0, @plant varchar(5)=null, @dpok date=null, @blanc varchar(11)=null,
-@photo varbinary(max)=null
-)
+@photo varbinary(max)=null)
 AS
 BEGIN TRY
 	BEGIN TRANSACTION
-    UPDATE [dbo].[kms]
-    SET 
-	act=@act,pv=@pv,nz=@nz,status=@status,p_doc=@p_doc,p_doc2=@p_doc2,vs=@vs,vs_data=@vs_data,sn_card=@sn_card,
-	enp=@enp,gz_data=@gz_data,q=@q,dp=@dp,dt=@dt,fam=@fam,d_type1=@d_type1,im=@im,d_type2=@d_type2,ot=@ot,
-	d_type3=@d_type3,w=@w,dr=@dr,true_dr=@true_dr,adr_id=@adr_id,adr50_id=@adr50_id,jt=@jt,scn=@scn,kl=@kl,
-	cont=@cont,c_doc=@c_doc,s_doc=@s_doc,n_doc=@n_doc,d_doc=@d_doc,e_doc=@e_doc,x_doc=@x_doc,u_doc=@u_doc,
-	snils=@snils,gr=@gr,mr=@mr,d_reg=@d_reg,form=@form,predst=@predst,spos=@spos,d_type4=@d_type4,coment=@coment,
-	ktg=@ktg,gzk_flag=@gzk_flag,doc_flag=@doc_flag,uec_flag=@uec_flag,s_card2=@s_card2,n_card2=@n_card2,
-	is2fio=@is2fio,ofioid=@ofioid,is2doc=@is2doc,odocid=@odocid,mcod=@mcod,oper=@oper,operpv=@operpv,
-	isrereg=@isrereg,osmoid=@osmoid,permid=@permid,perm2id=@perm2id,enp2id=@enp2id,predstid=@predstid,
-	wrkid=@wrkid,plant=@plant,dpok=@dpok,blanc=@blanc,photo=@photo WHERE recid=@recid
+	
+	DECLARE @_adr_id int
+	SET @_adr_id = dbo.fseekadr77(@ul, @dom, @kor, @str, @kv)
+	IF (@_adr_id != 0 ) SET @adr_id = @_adr_id
+	ELSE EXEC dbo.addadr77 @ul=@ul, @dom=@dom, @kor=@kor, @str=@str, @kv=@kv, @recid=@adr_id out
+
+	DECLARE @_permid int
+	SET @_permid = dbo.seekpermiss(@s_perm, @n_perm)
+	IF (@_permid != 0 ) SET @permid = @_permid
+	ELSE EXEC dbo.addpermiss @c_perm=@c_perm, @s_perm=@s_perm, @n_perm=@n_perm, @d_perm=@d_perm, @e_perm=@e_perm, @recid=@permid out
+
+    UPDATE [dbo].[kms] SET 
+		act=@act,pv=@pv,nz=@nz,status=@status,p_doc=@p_doc,p_doc2=@p_doc2,vs=@vs,vs_data=@vs_data,sn_card=@sn_card,
+		enp=@enp,gz_data=@gz_data,q=@q,dp=@dp,dt=@dt,fam=@fam,d_type1=@d_type1,im=@im,d_type2=@d_type2,ot=@ot,
+		d_type3=@d_type3,w=@w,dr=@dr,true_dr=@true_dr,adr_id=@adr_id,adr50_id=@adr50_id,jt=@jt,scn=@scn,kl=@kl,
+		cont=@cont,c_doc=@c_doc,s_doc=@s_doc,n_doc=@n_doc,d_doc=@d_doc,e_doc=@e_doc,x_doc=@x_doc,u_doc=@u_doc,
+		snils=@snils,gr=@gr,mr=@mr,d_reg=@d_reg,form=@form,predst=@predst,spos=@spos,d_type4=@d_type4,coment=@coment,
+		ktg=@ktg,gzk_flag=@gzk_flag,doc_flag=@doc_flag,uec_flag=@uec_flag,s_card2=@s_card2,n_card2=@n_card2,
+		is2fio=@is2fio,ofioid=@ofioid,is2doc=@is2doc,odocid=@odocid,mcod=@mcod,oper=@oper,operpv=@operpv,
+		isrereg=@isrereg,osmoid=@osmoid,permid=@permid,perm2id=@perm2id,enp2id=@enp2id,predstid=@predstid,
+		wrkid=@wrkid,plant=@plant,dpok=@dpok,blanc=@blanc,photo=@photo WHERE recid=@recid
+	
 	COMMIT TRANSACTION    
 END TRY
 BEGIN CATCH
