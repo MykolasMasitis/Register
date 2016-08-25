@@ -36,12 +36,16 @@
         </StackPanel>
 
         <TabControl Margin="10" Grid.Row="1">
+            <TabControl.Background>
+                <ImageBrush ImageSource="/Register;component/AntiquePaperSmall.jpg" TileMode="Tile"
+                        ViewportUnits="Absolute" Viewport="0,0,200,200"/>
+            </TabControl.Background>
             <TabItem Header="Основная информация">
                 <Grid Margin="10">
-                    <Grid.ColumnDefinitions> <!-- 1 столбец! -->
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions> <!-- 16 строк -->
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -64,37 +68,32 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Grid.Column="0"> <!-- Первая строка закладки -->
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock Margin="7" Text="Дата актуализации:"></TextBlock>
-                            <DatePicker Margin="5"
+                    <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Margin="7" Text="Дата актуализации:"></TextBlock>
+                        <DatePicker Margin="5"
                                 BorderBrush="{Binding Path=Stat.DpBrush}" BorderThickness="1" 
                                 SelectedDate="{Binding Path=DisplayedPerson.dp, Mode=TwoWay}"/>
-                            <Button Height="30" Width="30" Content="!"></Button>
-                        </StackPanel>
-                        
-                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Margin="7">Статус:</TextBlock>
-                            <ComboBox Margin="5" ItemsSource="{Binding StatusItems }" DisplayMemberPath="name" 
+                        <Button Height="30" Width="30" Content="!"></Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Margin="7">Статус:</TextBlock>
+                        <ComboBox Margin="5" ItemsSource="{Binding StatusItems }" DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code" UseLayoutRounding="False" MinWidth="200"/>
-                        </StackPanel>
-                        <!--
-                        <TextBlock Margin="7">Обратился:</TextBlock>
-                        <ComboBox Margin="5" MinWidth="100" ItemsSource="{Binding PredstItems }" DisplayMemberPath="name" 
-                              SelectedValue="{Binding DisplayedPerson.predst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="code"></ComboBox>
-                        -->
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="0"> <!--Вторая строка закладки-->
+                    </StackPanel>
+                </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -120,7 +119,7 @@
                             <Button Height="30" Width="30" Content="!"></Button>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="2" Grid.Column="0"> <!--Третья строка закладки-->
+                    <Grid Grid.Row="2" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
@@ -137,7 +136,7 @@
                             <TextBox MinWidth="50" Height="25"></TextBox>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="3" Grid.Column="0"> <!--Обратился, вид полиса-->
+                    <Grid Grid.Row="3" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -154,7 +153,7 @@
                         </StackPanel>
 
                     </Grid>
-                    <Grid Grid.Row="7" Grid.Column="0"> <!--Jt, SCN-->
+                    <Grid Grid.Row="7" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -176,7 +175,7 @@
                               SelectedValuePath="code"/>
                         </DockPanel>
                     </Grid>
-                    <Grid Grid.Row="8" Grid.Column="0"> <!--ВС, КМС, ЕНП-->
+                    <Grid Grid.Row="8" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -210,12 +209,14 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition MinWidth="50" Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0" Margin="7" Text="Фамилия :"></TextBlock>
@@ -248,7 +249,22 @@
                               SelectedValue="{Binding DisplayedPerson.d_type3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code">
                         </ComboBox>
-                    </Grid>  <!--ФИО-->
+
+                        <TextBlock Margin="7" Grid.Row="3" Grid.Column="0" >Дата рождения:</TextBlock>
+                        <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                                BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
+                                SelectedDate="{Binding Path=DisplayedPerson.dr, Mode=TwoWay}"/>
+
+                        <TextBlock Margin="7" Grid.Row="3" Grid.Column="2">Пол:</TextBlock>
+                        <ComboBox Margin="5"  Grid.Row="4" Grid.Column="3"
+                              ItemsSource="{Binding WItems }"
+                              DisplayMemberPath="name" 
+                              SelectedValue="{Binding DisplayedPerson.w, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="code"/>
+
+                        <Image Grid.Row="0" Grid.Column="4" Grid.RowSpan="4"
+                               Source="{Binding DisplayedPerson.photo}" Stretch="None"/>
+                    </Grid>
                     <Grid Grid.Row="10" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -263,7 +279,7 @@
                               SelectedValue="{Binding DisplayedPerson.w, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
                         </DockPanel>
-                        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+                        <!--<DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
                             <TextBlock Margin="7" DockPanel.Dock="Left">Дата рождения:</TextBlock>
                             <DatePicker HorizontalAlignment="Left" Margin="5"
                                 BorderBrush="{Binding Path=Stat.OtBrush}" BorderThickness="1" 
@@ -276,8 +292,8 @@
                               DisplayMemberPath="name" 
                               SelectedValue="{Binding DisplayedPerson.true_dr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
-                        </DockPanel>
-                    </Grid> <!--Пол, ДР, достоверность даты-->
+                        </DockPanel>-->
+                    </Grid>
                     <Grid Grid.Row="11" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5*"></ColumnDefinition>
@@ -314,7 +330,7 @@
                             <TextBox Margin="5" BorderThickness="1"
                                 Text="{Binding Path=DisplayedPerson.kv, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         </DockPanel>
-                    </Grid> <!--Улица, дом, корп, стр, кв-->
+                    </Grid>
                     <Grid Grid.Row="12" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -333,8 +349,8 @@
                               SelectedValue="{Binding DisplayedPerson.form, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="code"/>
                         </DockPanel>
-                    </Grid> <!-- СНИЛС, d_type4-->
-                    <Expander Grid.Row="14" Grid.Column="0" Header="Разрешение на проживание" IsExpanded="True"> <!--Permiss-->
+                    </Grid>
+                    <Expander Grid.Row="14" Grid.Column="0" Header="Разрешение на проживание" IsExpanded="True">
                         <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -372,7 +388,7 @@
                         </DockPanel>
                     </Grid>
                     </Expander>
-                    <Expander Grid.Row="15" Grid.Column="0" Header="Старое разрешение на проживание"> <!--Permiss-->
+                    <Expander Grid.Row="15" Grid.Column="0" Header="Старое разрешение на проживание">
                         <Grid> 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -410,6 +426,7 @@
                             </DockPanel>
                         </Grid>
                     </Expander>
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="Фото">

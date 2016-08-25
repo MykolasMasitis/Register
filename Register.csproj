@@ -78,8 +78,11 @@
     <Compile Include="Foundation\CovertDate.cs" />
     <Compile Include="Foundation\Messenger.cs" />
     <Compile Include="Foundation\RelayCommand.cs" />
+    <Compile Include="Model\Answers.cs" />
     <Compile Include="Model\Moves.cs" />
     <Compile Include="Model\StoreDB.cs" />
+    <Compile Include="ViewModels\answer.cs" />
+    <Compile Include="ViewModels\AnswersViewModel.cs" />
     <Compile Include="ViewModels\move.cs" />
     <Compile Include="ViewModels\CodFio.cs" />
     <Compile Include="ViewModels\d_type4.cs" />
@@ -168,7 +171,9 @@
   <ItemGroup>
     <Resource Include="LightBrushedx.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="AntiquePaperSmall.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>

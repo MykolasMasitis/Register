@@ -22,6 +22,9 @@ namespace Register
         private static Moves moves = new Moves();
         public static Moves Moves { get { return moves; } }
 
+        private static Answers answers = new Answers();
+        public static Answers Answers { get { return answers; } }
+
         internal static Messenger Messenger
         {
            get { return _messenger; }
