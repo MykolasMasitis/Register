@@ -12,7 +12,6 @@
             AutoGenerateColumns="False"
 			ItemsSource="{Binding DataItems}"
 			SelectedItem="{Binding SelectedPerson}"
-            DisplayMemberPath="fam"
 			foundation:CommandBehavior.RoutedEventName="SelectionChanged"
 			foundation:CommandBehavior.TheCommandToRun="{Binding ListBoxCommand}">
             <DataGrid.Columns>
@@ -22,11 +21,5 @@
                 <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=dr, StringFormat={}{0:dd.MM.yyyy}}" MinWidth="100"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <!--<ListBox Margin="10" Background="LightSkyBlue"
-			ItemsSource="{Binding DataItems}"
-			SelectedItem="{Binding SelectedPerson}"
-            DisplayMemberPath="fam"
-			foundation:CommandBehavior.RoutedEventName="SelectionChanged"
-			foundation:CommandBehavior.TheCommandToRun="{Binding ListBoxCommand}"/>-->
     </Grid>
 </UserControl>

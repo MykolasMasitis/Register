@@ -413,7 +413,8 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Фото">
-                <Grid>
+                <Border BorderBrush="Beige" BorderThickness="10" CornerRadius="30,30,30,30">
+                    <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -421,10 +422,17 @@
                     <Image x:Name="photo" Grid.Row="0"
                            Source="{Binding DisplayedPerson.photo}" Width="320" Height="400"></Image>
                     <Image x:Name="sign" Grid.Row="1"
-                           Source="{Binding DisplayedPerson.sign}" Width="320" Height="400"></Image>
+                           Source="{Binding DisplayedPerson.sign}" Width="736" Height="160"></Image>
+                </Grid>
+                </Border>
+            </TabItem>
+            <TabItem Header="Адрес">
+                <Grid>
+                    <DocumentViewer>
+                        
+                    </DocumentViewer>
                 </Grid>
             </TabItem>
-            <TabItem Header="Адрес"></TabItem>
         </TabControl>
     </Grid>
 </UserControl>

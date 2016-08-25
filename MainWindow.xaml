@@ -9,17 +9,40 @@
             <ImageBrush ImageSource="LightBrushedx.jpg" TileMode="Tile"
                         ViewportUnits="Absolute" Viewport="0,0,200,200"/>
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <vw:PersonSelectionView Grid.Row="0" Grid.Column="0"/>
+        <Menu Grid.Row="0">
+            
+        </Menu>
 
-        <GridSplitter Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <vw:PersonSelectionView Grid.Column="0"/>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch"
                       ResizeBehavior="PreviousAndNext" Width="5"></GridSplitter>
-        <vw:PersonDisplay Grid.Row="0" Grid.Column="2"/>
+            
+            <vw:PersonDisplay Grid.Column="2"/>
+        
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Expander Header="История застрахованного">
+                <vw:MovesView></vw:MovesView>
+            </Expander>
+        </Grid>
+
+        <StatusBar Grid.Row="3"></StatusBar>
 
     </Grid>
 </Window>

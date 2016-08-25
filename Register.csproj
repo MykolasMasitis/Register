@@ -78,11 +78,14 @@
     <Compile Include="Foundation\CovertDate.cs" />
     <Compile Include="Foundation\Messenger.cs" />
     <Compile Include="Foundation\RelayCommand.cs" />
+    <Compile Include="Model\Moves.cs" />
     <Compile Include="Model\StoreDB.cs" />
+    <Compile Include="ViewModels\move.cs" />
     <Compile Include="ViewModels\CodFio.cs" />
     <Compile Include="ViewModels\d_type4.cs" />
     <Compile Include="ViewModels\jt.cs" />
     <Compile Include="ViewModels\kms.cs" />
+    <Compile Include="ViewModels\MovesViewModel.cs" />
     <Compile Include="ViewModels\permis2.cs" />
     <Compile Include="ViewModels\permiss.cs" />
     <Compile Include="ViewModels\PersonDisplayModel.cs" />
@@ -94,6 +97,9 @@
     <Compile Include="ViewModels\street.cs" />
     <Compile Include="ViewModels\true_dr.cs" />
     <Compile Include="ViewModels\w.cs" />
+    <Compile Include="Views\MovesView.xaml.cs">
+      <DependentUpon>MovesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PersonDisplay.xaml.cs">
       <DependentUpon>PersonDisplay.xaml</DependentUpon>
     </Compile>
@@ -116,6 +122,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MovesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PersonDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

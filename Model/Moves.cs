@@ -6,19 +6,21 @@ using Register.ViewModels;
 
 namespace Register.Model
 {
-    public class StoreDB
+    public class Moves 
     {
         public bool hasError = false;
         public string errorMessage;
 
-        public MyObservableCollection<kms> GetPersons()
+        public MoveObservableCollection<move> GetMoves(int id) 
         {
             hasError = false;
             SqlConnection con = new SqlConnection(App.conString);
-            SqlCommand cmd = new SqlCommand("select top(100) * from kmsview", con);
+            SqlCommand cmd = new SqlCommand("select * from moves where kmsid=@id", con); /* ??? */
+            cmd.Parameters.Add("@id", SqlDbType.Int, 4);
+            cmd.Parameters["@id"].Value = id;
             cmd.CommandType = CommandType.Text;
 
-            MyObservableCollection<kms> persons = new MyObservableCollection<kms>();
+            MoveObservableCollection<move> moves = new MoveObservableCollection<move>();
 
             int nrecs = 0;
             try
@@ -27,101 +29,47 @@ namespace Register.Model
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                kms person = new kms(
-                    (int)reader["recid"],
-                    (bool)reader["act"],
-                    reader.GetValue(reader.GetOrdinal("pv")) != DBNull.Value ? (string)reader["pv"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("nz")) != DBNull.Value ? (string)reader["nz"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("status")) != DBNull.Value ? (byte)reader["status"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("p_doc")) != DBNull.Value ? (byte)reader["p_doc"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("p_doc2")) != DBNull.Value ? (byte)reader["p_doc2"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("vs")) != DBNull.Value ? (string)reader["vs"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("vs_data")) != DBNull.Value ? (DateTime?)reader["vs_data"] : null,
-                    reader.GetValue(reader.GetOrdinal("sn_card")) != DBNull.Value ? (string)reader["sn_card"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("enp")) != DBNull.Value ? (string)reader["enp"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("gz_data")) != DBNull.Value ? (DateTime?)reader["gz_data"] : null,
-                    reader.GetValue(reader.GetOrdinal("q")) != DBNull.Value ? (string)reader["q"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("dp")) != DBNull.Value ? (DateTime?)reader["dp"] : null,
-                    reader.GetValue(reader.GetOrdinal("dt")) != DBNull.Value ? (DateTime?)reader["dt"] : null,
-                    reader.GetValue(reader.GetOrdinal("fam")) != DBNull.Value ? (string)reader["fam"] : string.Empty,
-                    (string)reader["d_type1"],
-                    reader.GetValue(reader.GetOrdinal("im")) != DBNull.Value ? (string)reader["im"] : string.Empty,
-                    (string)reader["d_type2"],
-                    reader.GetValue(reader.GetOrdinal("ot")) != DBNull.Value ? (string)reader["ot"] : string.Empty,
-                    (string)reader["d_type3"],
-                    (byte)reader["w"],
-                    reader.GetValue(reader.GetOrdinal("dr")) != DBNull.Value ? (DateTime?)reader["dr"] : null,
-                    reader.GetValue(reader.GetOrdinal("true_dr")) != DBNull.Value ? (byte)reader["true_dr"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("adr_id")) != DBNull.Value ? (int)reader["adr_id"] : (int)0,
-                    reader.GetValue(reader.GetOrdinal("adr50_id")) != DBNull.Value ? (int)reader["adr50_id"] : (int)0,
-                    reader.GetValue(reader.GetOrdinal("jt")) != DBNull.Value ? (string)reader["jt"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("scn")) != DBNull.Value ? (string)reader["scn"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("kl")) != DBNull.Value ? (byte)reader["kl"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("cont")) != DBNull.Value ? (string)reader["cont"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("c_doc")) != DBNull.Value ? (byte)reader["c_doc"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("s_doc")) != DBNull.Value ? (string)reader["s_doc"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("n_doc")) != DBNull.Value ? (string)reader["n_doc"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("d_doc")) != DBNull.Value ? (DateTime?)reader["d_doc"] : null,
-                    reader.GetValue(reader.GetOrdinal("e_doc")) != DBNull.Value ? (DateTime?)reader["e_doc"] : null,
-                    reader.GetValue(reader.GetOrdinal("x_doc")) != DBNull.Value ? (byte)reader["x_doc"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("u_doc")) != DBNull.Value ? (string)reader["u_doc"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("snils")) != DBNull.Value ? (string)reader["snils"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("gr")) != DBNull.Value ? (string)reader["gr"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("mr")) != DBNull.Value ? (string)reader["mr"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("d_reg")) != DBNull.Value ? (DateTime?)reader["d_reg"] : null,
-                    reader.GetValue(reader.GetOrdinal("form")) != DBNull.Value ? (byte)reader["form"] :(byte)0,
-                    reader.GetValue(reader.GetOrdinal("predst")) != DBNull.Value ? (string)reader["predst"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("spos")) != DBNull.Value ? (byte)reader["spos"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("d_type4")) != DBNull.Value ? (byte)reader["d_type4"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("coment")) != DBNull.Value ? (string)reader["coment"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("ktg")) != DBNull.Value ? (string)reader["ktg"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("gzk_flag")) != DBNull.Value ? (byte)reader["gzk_flag"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("doc_flag")) != DBNull.Value ? (byte)reader["doc_flag"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("uec_flag")) != DBNull.Value ? (string)reader["uec_flag"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("s_card2")) != DBNull.Value ? (string)reader["s_card2"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("n_card2")) != DBNull.Value ? (string)reader["n_card2"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("is2fio")) != DBNull.Value ? (string)reader["is2fio"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("ofioid")) != DBNull.Value ? (int)reader["ofioid"] : (int)0,
-                    reader.GetValue(reader.GetOrdinal("is2doc")) != DBNull.Value ? (string)reader["is2doc"] : string.Empty,
-                    reader.GetValue(reader.GetOrdinal("odocid")) != DBNull.Value ? (int)reader["odocid"] : (int)0,
-                    reader.GetValue(reader.GetOrdinal("mcod")) != DBNull.Value ? (string)reader["mcod"] : string.Empty,
-                    reader.IsDBNull(reader.GetOrdinal("oper")) ? (byte)reader["oper"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("operpv")) != DBNull.Value ? (byte)reader["operpv"] : (byte)0,
-                    reader.GetValue(reader.GetOrdinal("isrereg")) != DBNull.Value ? (byte)reader["isrereg"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("osmoid")) != DBNull.Value ? (int)reader["osmoid"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("permid")) != DBNull.Value ? (int)reader["permid"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("perm2id")) != DBNull.Value ? (int)reader["perm2id"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("enp2id")) != DBNull.Value ? (int)reader["enp2id"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("predstid")) != DBNull.Value ? (int)reader["predstid"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("wrkid")) != DBNull.Value ? (int)reader["wrkid"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("plant")) != DBNull.Value ? (string)reader["plant"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("dpok")) != DBNull.Value ? (DateTime?)reader["dpok"] : null,
-                    reader.GetValue(reader.GetOrdinal("blanc")) != DBNull.Value ? (string)reader["blanc"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("photo")) != DBNull.Value ? (byte[])reader["photo"] : null,
-                    reader.GetValue(reader.GetOrdinal("sign")) != DBNull.Value ? (byte[])reader["sign"] : null,
-                    (DateTime)reader["created"],
-                    reader.GetValue(reader.GetOrdinal("ul")) != DBNull.Value ? (int)reader["ul"] : new int(),
-                    reader.GetValue(reader.GetOrdinal("dom")) != DBNull.Value ? (string)reader["dom"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("kor")) != DBNull.Value ? (string)reader["kor"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("str")) != DBNull.Value ? (string)reader["str"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("kv")) != DBNull.Value ? (string)reader["kv"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("c_perm")) != DBNull.Value ? (byte)reader["c_perm"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("s_perm")) != DBNull.Value ? (string)reader["s_perm"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("n_perm")) != DBNull.Value ? (string)reader["n_perm"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("d_perm")) != DBNull.Value ? (DateTime?)reader["d_perm"] : null,
-                    reader.GetValue(reader.GetOrdinal("e_perm")) != DBNull.Value ? (DateTime?)reader["e_perm"] : null,
-                    reader.GetValue(reader.GetOrdinal("c_perm2")) != DBNull.Value ? (byte)reader["c_perm2"] : new byte(),
-                    reader.GetValue(reader.GetOrdinal("s_perm2")) != DBNull.Value ? (string)reader["s_perm2"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("n_perm2")) != DBNull.Value ? (string)reader["n_perm2"] : String.Empty,
-                    reader.GetValue(reader.GetOrdinal("d_perm2")) != DBNull.Value ? (DateTime?)reader["d_perm2"] : null,
-                    reader.GetValue(reader.GetOrdinal("e_perm2")) != DBNull.Value ? (DateTime?)reader["e_perm2"] : null
-                    );
-                    persons.Add(person);
+                    move move = new move(
+                        (int)reader["recid"],
+                        (int)reader["kmsid"],
+                        reader.GetValue(reader.GetOrdinal("frecid")) != DBNull.Value ? (string)reader["frecid"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("et")) != DBNull.Value ? (string)reader["et"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("fname")) != DBNull.Value ? (string)reader["fname"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("mkdate")) != DBNull.Value ? (DateTime?)reader["mkdate"] : null,
+                        reader.GetValue(reader.GetOrdinal("vs")) != DBNull.Value ? (string)reader["vs"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("s_card")) != DBNull.Value ? (string)reader["s_card"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("n_card")) != DBNull.Value ? (int)reader["n_card"] : (int)0,
+                        reader.GetValue(reader.GetOrdinal("c_okato")) != DBNull.Value ? (string)reader["c_okato"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("enp")) != DBNull.Value ? (string)reader["enp"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("dp")) != DBNull.Value ? (DateTime?)reader["dp"] : null,
+                        reader.GetValue(reader.GetOrdinal("jt")) != DBNull.Value ? (string)reader["jt"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("scn")) != DBNull.Value ? (string)reader["scn"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("pricin")) != DBNull.Value ? (string)reader["pricin"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("tranz")) != DBNull.Value ? (string)reader["tranz"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("q")) != DBNull.Value ? (string)reader["q"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("err")) != DBNull.Value ? (string)reader["err"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("err_text")) != DBNull.Value ? (string)reader["err_text"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("ans_fl")) != DBNull.Value ? (string)reader["ans_fl"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("nz")) != DBNull.Value ? (int)reader["nz"] : (int)0,
+                        reader.GetValue(reader.GetOrdinal("n_kor")) != DBNull.Value ? (int)reader["n_kor"] : (int)0,
+                        reader.GetValue(reader.GetOrdinal("fam")) != DBNull.Value ? (string)reader["fam"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("im")) != DBNull.Value ? (string)reader["im"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("ot")) != DBNull.Value ? (string)reader["ot"] : string.Empty,
+                        (byte)reader["w"],
+                        reader.GetValue(reader.GetOrdinal("dr")) != DBNull.Value ? (DateTime?)reader["dr"] : null,
+                        reader.GetValue(reader.GetOrdinal("c_doc")) != DBNull.Value ? (byte)reader["c_doc"] : new byte(),
+                        reader.GetValue(reader.GetOrdinal("s_doc")) != DBNull.Value ? (string)reader["s_doc"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("n_doc")) != DBNull.Value ? (string)reader["n_doc"] : string.Empty,
+                        reader.GetValue(reader.GetOrdinal("d_doc")) != DBNull.Value ? (DateTime?)reader["d_doc"] : null,
+                        reader.GetValue(reader.GetOrdinal("e_doc")) != DBNull.Value ? (DateTime?)reader["e_doc"] : null,
+                        (DateTime)reader["created"]
+                        );
+                    moves.Add(move);
                     nrecs++;
                 }
 
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 errorMessage = "GetPerson SQL error, " + ex.Message;
                 MessageBox.Show(errorMessage);
@@ -138,10 +86,10 @@ namespace Register.Model
                 con.Close();
             }
             //MessageBox.Show(nrecs.ToString());
-            return persons;
-        } //GetPersons()
+            return moves;
+        } //GetMoves()
 
-        public bool UpdatePerson(kms displayP)
+        public bool UpdateMove(kms displayP)
         {
             kms p = displayP;
             hasError = false;
@@ -326,7 +274,7 @@ namespace Register.Model
             return (!hasError);
         } //UpdatePerson()
 
-        public bool AddPerson(kms displayP)
+        public bool AddMove(kms displayP)
         {
             kms p = displayP;
             hasError = false;
@@ -501,7 +449,7 @@ namespace Register.Model
             return !hasError;
         } //AddProduct()
 
-        public bool DeletePerson(int recid) 
+        public bool DeleteMove(int recid)
         {
             hasError = false;
             SqlConnection con = new SqlConnection(App.conString);
@@ -531,5 +479,5 @@ namespace Register.Model
             return !hasError;
         }// DeleteProduct()
 
-    } //class StoreDB
+    } //class Moves
 } //namespace
