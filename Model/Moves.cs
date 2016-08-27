@@ -31,14 +31,14 @@ namespace Register.Model
                 {
                     move move = new move(
                         (int)reader["recid"],
-                        (int)reader["kmsid"],
-                        reader.GetValue(reader.GetOrdinal("frecid")) != DBNull.Value ? (string)reader["frecid"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("et")) != DBNull.Value ? (string)reader["et"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("fname")) != DBNull.Value ? (string)reader["fname"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("mkdate")) != DBNull.Value ? (DateTime?)reader["mkdate"] : null,
+                        (int)reader["kmsid"],
+                        reader.GetValue(reader.GetOrdinal("frecid")) != DBNull.Value ? (string)reader["frecid"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("vs")) != DBNull.Value ? (string)reader["vs"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("s_card")) != DBNull.Value ? (string)reader["s_card"] : string.Empty,
-                        reader.GetValue(reader.GetOrdinal("n_card")) != DBNull.Value ? (int)reader["n_card"] : (int)0,
+                        reader.GetValue(reader.GetOrdinal("n_card")) != DBNull.Value ? (string)reader["n_card"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("c_okato")) != DBNull.Value ? (string)reader["c_okato"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("enp")) != DBNull.Value ? (string)reader["enp"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("dp")) != DBNull.Value ? (DateTime?)reader["dp"] : null,
@@ -50,7 +50,7 @@ namespace Register.Model
                         reader.GetValue(reader.GetOrdinal("err")) != DBNull.Value ? (string)reader["err"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("err_text")) != DBNull.Value ? (string)reader["err_text"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("ans_fl")) != DBNull.Value ? (string)reader["ans_fl"] : string.Empty,
-                        reader.GetValue(reader.GetOrdinal("nz")) != DBNull.Value ? (int)reader["nz"] : (int)0,
+                        reader.GetValue(reader.GetOrdinal("nz")) != DBNull.Value ? (short)reader["nz"] : (int)0,
                         reader.GetValue(reader.GetOrdinal("n_kor")) != DBNull.Value ? (int)reader["n_kor"] : (int)0,
                         reader.GetValue(reader.GetOrdinal("fam")) != DBNull.Value ? (string)reader["fam"] : string.Empty,
                         reader.GetValue(reader.GetOrdinal("im")) != DBNull.Value ? (string)reader["im"] : string.Empty,
@@ -71,13 +71,13 @@ namespace Register.Model
             }
             catch (SqlException ex)
             {
-                errorMessage = "GetPerson SQL error, " + ex.Message;
+                errorMessage = "GetMoves SQL error, " + ex.Message;
                 MessageBox.Show(errorMessage);
                 hasError = true;
             }
             catch (Exception ex)
             {
-                errorMessage = "GetPersonS error, " + ex.Message;
+                errorMessage = "GetMoves error, " + ex.Message;
                 MessageBox.Show(errorMessage);
                 hasError = true;
             }

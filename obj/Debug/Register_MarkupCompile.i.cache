@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\MYKMS\Register\App.xaml
-51009383874
+6-967195913
 
-38185984331
+39-1641820979
 18-1856546186
-GelButtonResourceDictionary.xaml;MainWindow.xaml;Views\MovesView.xaml;Views\PersonDisplay.xaml;Views\PersonSelectionView.xaml;
+GelButtonResourceDictionary.xaml;MainWindow.xaml;Views\AnswersView.xaml;Views\MovesView.xaml;Views\PersonDisplay.xaml;Views\PersonSelectionView.xaml;
 
-False
+True
 

@@ -6,13 +6,16 @@ SET @table = 'nsi.status';
 IF OBJECT_ID(@table) IS NOT NULL AND OBJECTPROPERTY(OBJECT_ID(@table), 'IsTable')=1 DROP TABLE [nsi].[status]
 CREATE TABLE [nsi].[status]([recid] int IDENTITY(1,1),[code] tinyint, [name] char(25), [used] bit,
 CONSTRAINT [PK_status] PRIMARY KEY CLUSTERED ([recid] ASC))
-INSERT INTO [nsi].[status] (code,name,used) VALUES (0,'Не определен',0)
-INSERT INTO [nsi].[status] (code,name,used) VALUES (1,'Ожидание подачи',0)
-INSERT INTO [nsi].[status] (code,name,used) VALUES (2,'Ожидание ответа',1)
-INSERT INTO [nsi].[status] (code,name,used) VALUES (3,'Обработана',1)
-INSERT INTO [nsi].[status] (code,name,used) VALUES (4,'Полис на изготовлении',1)
-INSERT INTO [nsi].[status] (code,name,used) VALUES (5,'Полис получен',1)
-INSERT INTO [nsi].[status] (code,name,used) VALUES (6,'Полис выдан',1)
+INSERT INTO [nsi].[status] (code,name,used) VALUES (0,'Не определен',0),
+	(1,'Ожидание подачи',0),(2,'Ожидание ответа',1),(3,'Обработана',1),
+	(4,'Полис на изготовлении',1),(5,'Полис получен',1),(6,'Полис выдан',1)
+
+--INSERT INTO [nsi].[status] (code,name,used) VALUES (1,'Ожидание подачи',0)
+--INSERT INTO [nsi].[status] (code,name,used) VALUES (2,'Ожидание ответа',1)
+--INSERT INTO [nsi].[status] (code,name,used) VALUES (3,'Обработана',1)
+--INSERT INTO [nsi].[status] (code,name,used) VALUES (4,'Полис на изготовлении',1)
+--INSERT INTO [nsi].[status] (code,name,used) VALUES (5,'Полис получен',1)
+--INSERT INTO [nsi].[status] (code,name,used) VALUES (6,'Полис выдан',1)
 CREATE UNIQUE INDEX code ON [nsi].[status] (code)
 GO
 
@@ -74,4 +77,11 @@ SET @table = 'nsi.streets';
 IF OBJECT_ID(@table) IS NOT NULL AND OBJECTPROPERTY(OBJECT_ID(@table), 'IsTable')=1 DROP TABLE [nsi].[streets]
 CREATE TABLE [nsi].[streets]([recid] int IDENTITY(1,1), [code] int, [name] char(60),
 CONSTRAINT [PK_streets] PRIMARY KEY CLUSTERED ([recid] ASC))
+GO
+
+DECLARE @table sysname;
+SET @table = 'nsi.kl';
+IF OBJECT_ID(@table, 'U') IS NOT NULL DROP TABLE [nsi].[kl]
+CREATE TABLE [nsi].[kl]([recid] int IDENTITY(1,1), [code] tinyint, [name] char(40), [tip] tinyint,
+CONSTRAINT [PK_kl] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO

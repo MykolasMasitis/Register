@@ -54,7 +54,7 @@ GO
 CREATE UNIQUE INDEX unik ON adr77 (ul, dom, kor, str, kv)
 GO
 
-CREATE FUNCTION [dbo].[seekadr77](@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='')
+CREATE FUNCTION [dbo].[fseekadr77](@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='')
 RETURNS int
 BEGIN
  DECLARE @recid int
@@ -66,14 +66,14 @@ BEGIN
 END
 GO 
 
---CREATE PROCEDURE [dbo].[seekadr77](@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='',
--- @recid int out)
---AS
---BEGIN
---SET NOCOUNT ON;
---SELECT @recid = recid FROM adr77 WHERE ul=@ul AND dom=@dom AND kor=@kor AND str=@str AND kv=@kv;
---END
---GO
+CREATE PROCEDURE [dbo].[seekadr77](@ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='',
+ @recid int=null out)
+AS
+BEGIN
+SET NOCOUNT ON;
+SELECT recid FROM adr77 WHERE ul=@ul AND dom=@dom AND kor=@kor AND str=@str AND kv=@kv;
+END
+GO
 
 CREATE PROCEDURE [dbo].[addadr77] (
 @ul int=0, @dom varchar(7)='', @kor varchar(5)='', @str varchar(5)='', @kv varchar(5)='', @recid int out)
@@ -89,9 +89,9 @@ GO
 CREATE TABLE [dbo].[answers](
 [recid] int IDENTITY(0,1), [kmsid] int, [data] date, [tiperz] varchar(15), [sn_pol] varchar(17), [enp] varchar(16), 
 [s_card] varchar(6), [n_card] varchar(10), [date_b] date, [date_e] date, [q] varchar(2), [q_ogrn] varchar(13), [fam] varchar(25),
-[im] varchar(25), [ot] varchar(25), [dr] varchar(8), [w] Sex, [ans_r] varchar(3), [snils] varchar(14), [c_doc] tinyint,
+[im] varchar(25), [ot] varchar(25), [dr] date, [w] Sex, [ans_r] varchar(3), [snils] varchar(14), [c_doc] tinyint,
 [s_doc] varchar(9), [n_doc] varchar(8), [d_doc] date, [gr] varchar(3), [erz] varchar(1), [tip_d] varchar(1),
-[okato] varchar(5), [npp] dec(2), [err] varchar(150), [created] datetime default sysdatetime(),
+[okato] varchar(5), [npp] byte, [err] varchar(150), [created] datetime default sysdatetime(),
 CONSTRAINT [PK_answers] PRIMARY KEY CLUSTERED ([recid] ASC)
 )
 GO
@@ -136,10 +136,10 @@ GO
 CREATE TABLE [dbo].[moves](
 [recid] int IDENTITY(0,1),
 [et] varchar(1), [fname] varchar(25), [mkdate] smalldatetime, [kmsid] int, [frecid] varchar(6),
-[vs] varchar(9), [s_card] varchar(6), [n_card] dec(10), [c_okato] varchar(5), [enp] varchar(16), [dp] date, [jt] varchar(1),
+[vs] varchar(9), [s_card] varchar(6), [n_card] varchar(10), [c_okato] varchar(5), [enp] varchar(16), [dp] date, [jt] varchar(1),
 [scn] varchar(3), [pricin] varchar(3), [tranz] varchar(3), [q] varchar(2), [err] varchar(5), [err_text] varchar(max),
 [ans_fl] varchar(2), [nz] dec(3), [n_kor] dec(6), [fam] varchar(25), [im] varchar(20), [ot] varchar(20), [w] Sex, 
-[dr] date, [c_doc] dec(2), [s_doc] varchar(9), [n_doc] varchar(8), [d_doc] date, [e_doc] date,
+[dr] date, [c_doc] tinyint, [s_doc] varchar(9), [n_doc] varchar(8), [d_doc] date, [e_doc] date,
 [created] datetime default sysdatetime(),
 CONSTRAINT [PK_moves] PRIMARY KEY CLUSTERED ([recid] ASC))
 GO
@@ -211,7 +211,7 @@ GO
 CREATE UNIQUE INDEX sn_perm ON permiss (s_perm, n_perm)
 GO
 
-CREATE FUNCTION [dbo].[seekpermiss](@s_perm varchar(9)='', @n_perm varchar(8)='')
+CREATE FUNCTION [dbo].[fseekpermiss](@s_perm varchar(9)='', @n_perm varchar(8)='')
 RETURNS int
 BEGIN
  DECLARE @recid int
@@ -235,16 +235,13 @@ END
 GO
 -- Permiss
 
---CREATE PROCEDURE [dbo].[seekpermiss]
---(
---@s_perm varchar(9)='', @n_perm varchar(8)='', @recid int=NULL out
---)
---AS
---BEGIN
---SET NOCOUNT ON;
---SELECT recid FROM permiss WHERE s_perm=@s_perm AND n_perm=@n_perm;
---END
---GO
+CREATE PROCEDURE [dbo].[seekpermiss](@s_perm varchar(9)='', @n_perm varchar(8)='', @recid int=NULL out)
+AS
+BEGIN
+SET NOCOUNT ON;
+SELECT recid FROM permiss WHERE s_perm=@s_perm AND n_perm=@n_perm;
+END
+GO
 
 CREATE TABLE [dbo].[permis2](
 [recid] int IDENTITY(0,1),

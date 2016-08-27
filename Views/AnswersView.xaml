@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Register.Views.AnswersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="clr-namespace:Register"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vw="clr-namespace:Register.Views"
+    xmlns:vm="clr-namespace:Register.ViewModels"
+    xmlns:foundation="clr-namespace:Register.Wpf">
+    <UserControl.DataContext>
+        <vm:AnswersViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <DataGrid  Margin="10" Background="LightSkyBlue"
+            AutoGenerateColumns="False"
+			ItemsSource="{Binding DataItems}"
+			SelectedItem="{Binding SelectedPerson}"
+			foundation:CommandBehavior.RoutedEventName="SelectionChanged"
+			foundation:CommandBehavior.TheCommandToRun="{Binding ListBoxCommand}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding data, StringFormat={}{0:dd.MM.yyyy}}" MinWidth="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="ЕНП" Binding="{Binding enp}" MinWidth="100"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

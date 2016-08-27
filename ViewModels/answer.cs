@@ -199,8 +199,8 @@ namespace Register.ViewModels
             set { _okato = value; NotifyPropertyChanged("okato"); }
         }
 
-        private string _npp;
-        public string npp
+        private byte _npp;
+        public byte npp
         {
             get { return _npp; }
             set { _npp = value; NotifyPropertyChanged("npp"); }
@@ -262,7 +262,7 @@ namespace Register.ViewModels
             string _s_card, string _n_card, DateTime? _date_b, DateTime? _date_e, string _q, string _q_ogrn,
             string _fam, string _im, string _ot, string _dr, byte _w, string _ans_r, string _snils,
             byte _c_doc, string _s_doc, string _n_doc, DateTime? _d_doc, string _gr, string _erz, string _tip_d,
-            string _okato, string _npp, string _err, DateTime _created)
+            string _okato, byte _npp, string _err, DateTime _created)
         {
             recid = _recid; kmsid = _kmsid; data = _data; tiperz = _tiperz; sn_pol = _sn_pol; enp = _enp;
             s_card = _s_card; n_card = _n_card; date_b = _date_b; date_e = _date_e; q = _q; q_ogrn = _q_ogrn;

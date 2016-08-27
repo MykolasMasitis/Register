@@ -15,11 +15,11 @@ namespace Register.ViewModels
         {
             Messenger messenger = App.Messenger;
             messenger.Register("PersonSelectionChanged", (Action<kms>)(param => ProcessAnswers(param)));
-            dataItems = new AnswerObservableCollection<move>();
+            dataItems = new AnswerObservableCollection<answer>();
         } //ctor
 
-        private AnswerObservableCollection<move> dataItems;
-        public AnswerObservableCollection<move> DataItems
+        private AnswerObservableCollection<answer> dataItems;
+        public AnswerObservableCollection<answer> DataItems
         {
             get { return dataItems; }
             set { dataItems = value; OnPropertyChanged(new PropertyChangedEventArgs("DataItems")); }
@@ -31,13 +31,13 @@ namespace Register.ViewModels
                 PropertyChanged(this, e);
         }
 
-        public void ProcessMoves(kms p)
+        public void ProcessAnswers(kms p) 
         {
             if (p == null) { return; }
-            DataItems = App.Answers.GeGetMoves(p.recid);
+            DataItems = App.Answers.GetAnswers(p.recid);
         } // ProcessProduct()
     }
-    public class AnswerObservableCollection<move> : ObservableCollection<move>
+    public class AnswerObservableCollection<answer> : ObservableCollection<answer>
     {
         public void UpdateCollection()
         {
@@ -46,7 +46,7 @@ namespace Register.ViewModels
         }
 
 
-        public void ReplaceItem(int index, move item)
+        public void ReplaceItem(int index, answer item)
         {
             base.SetItem(index, item);
         }

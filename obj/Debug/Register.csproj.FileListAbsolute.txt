@@ -38,3 +38,5 @@ D:\MYKMS\Register\obj\Debug\Views\PersonDisplay.g.cs
 D:\MYKMS\Register\obj\Debug\Views\PersonDisplay.baml
 D:\MYKMS\Register\obj\Debug\Views\MovesView.g.cs
 D:\MYKMS\Register\obj\Debug\Views\MovesView.baml
+D:\MYKMS\Register\obj\Debug\Views\AnswersView.g.cs
+D:\MYKMS\Register\obj\Debug\Views\AnswersView.baml

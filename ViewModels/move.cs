@@ -66,8 +66,8 @@ namespace Register.ViewModels
             set { _s_card = value; NotifyPropertyChanged("s_card"); }
         }
 
-        private int _n_card;
-        public int n_card
+        private string _n_card;
+        public string n_card
         {
             get { return _n_card; }
             set { _n_card = value; NotifyPropertyChanged("n_card"); }
@@ -282,13 +282,13 @@ namespace Register.ViewModels
         #region Constructors
         public move() { }
 
-        public move(int _recid, int _kmsid, string _frecid, string _et, string _fname, DateTime? _mkdate, string _vs,
-            string _s_card, int _n_card, string _c_okato, string _enp, DateTime? _dp, string _jt, string _scn,
+        public move(int _recid, string _et, string _fname, DateTime? _mkdate, int _kmsid, string _frecid, string _vs,
+            string _s_card, string _n_card, string _c_okato, string _enp, DateTime? _dp, string _jt, string _scn,
             string _pricin, string _tranz, string _q, string _err, string _err_text, string _ans_fl, int _nz,
             int _n_kor, string _fam, string _im, string _ot, byte _w, DateTime? _dr, byte _c_doc, string _s_doc,
             string _n_doc, DateTime? _d_doc, DateTime? _e_doc, DateTime _created)
         {
-            recid = _recid; kmsid = _kmsid; frecid = _frecid; et = _et; fname = _fname; mkdate = _mkdate; vs = _vs;
+            recid = _recid; et = _et; fname = _fname; mkdate = _mkdate; kmsid = _kmsid; frecid = _frecid;  vs = _vs;
             s_card = _s_card; n_card = _n_card; c_okato = _c_okato; enp = _enp; dp = _dp; jt = _jt; scn = _scn;
             pricin = _pricin; tranz = _tranz; q = _q; err = _err; err_text = _err_text; ans_fl = _ans_fl; nz = _nz;
             n_kor = _n_kor; fam = _fam; im = _im; ot = _ot; w = _w; dr = _dr; c_doc = _c_doc; s_doc = _s_doc;
